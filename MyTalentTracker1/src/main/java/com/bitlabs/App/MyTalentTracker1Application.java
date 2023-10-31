@@ -11,6 +11,7 @@ public class MyTalentTracker1Application {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MyTalentTracker1Application.class, args);
+		System.out.println("gitchanges");
 	}
 
 }
