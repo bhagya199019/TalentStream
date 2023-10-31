@@ -1,5 +1,7 @@
 package com.bitlabs.App.ServiceImpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -13,7 +15,7 @@ import com.bitlabs.App.Service.RegisterApplicantService;
 public class RegisterApplicantServiceimpl implements RegisterApplicantService{
 	
 	@Autowired
-	private JobApplicantRepository jobApplicantrepository;
+	private JobApplicantRepository jobApplicantRepository;
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
@@ -21,21 +23,30 @@ public class RegisterApplicantServiceimpl implements RegisterApplicantService{
 	
 	
 	public JobApplicant findByEmailAddress(String userEmail) {
-		return jobApplicantrepository.findByEmail(userEmail);
+		return jobApplicantRepository.findByEmail(userEmail);
 		
 	}
 
 	
 	public ResponseEntity<String> saveApplicant(JobApplicant jobApplicant){
 		
-		if(jobApplicantrepository.existsByEmail(jobApplicant.getEmail())){
+		if(jobApplicantRepository.existsByEmail(jobApplicant.getEmail())){
 		return ResponseEntity.badRequest().body("Email already registered");
 		}
 		
-		 jobApplicant.setPassword(passwordEncoder.encode(jobApplicant.getPassword()));
-			jobApplicantrepository.save(jobApplicant);
+		
+	jobApplicant.setPassword(passwordEncoder.encode(jobApplicant.getPassword()));
+		
+			jobApplicantRepository.save(jobApplicant);
 			 return ResponseEntity.ok("Applicant registered successfully");
 			
 	}
+	
+		public List<JobApplicant> getAllApplicants(){
+			
+			return jobApplicantRepository.findAll();
+			
+			
+		}
 	
 }
