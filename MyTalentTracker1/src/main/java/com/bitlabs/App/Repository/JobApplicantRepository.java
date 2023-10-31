@@ -8,4 +8,6 @@ public interface JobApplicantRepository extends JpaRepository<JobApplicant,Long>
 	
 	JobApplicant findByEmail(String email);
     boolean existsByEmail(String email);
+    
+   JobApplicant getJobApplicantById(long applicantId);
 }

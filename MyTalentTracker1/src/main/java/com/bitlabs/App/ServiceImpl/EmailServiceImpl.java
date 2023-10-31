@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.bitlabs.App.Service.EmailService;
 
 @Service
-public class EmailServiceimpl implements EmailService {
+public class EmailServiceImpl implements EmailService {
 
 	@Autowired
     private JavaMailSender javaMailSender;

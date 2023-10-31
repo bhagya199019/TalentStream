@@ -11,7 +11,7 @@ import com.bitlabs.App.Service.OtpService;
 
 
 @Service
-public class OtpServiceimpl implements OtpService{
+public class OtpServiceImpl implements OtpService{
 
 	
 	private static final long OTP_VALID_DURATION_MS=120*1000; //120 seconds
