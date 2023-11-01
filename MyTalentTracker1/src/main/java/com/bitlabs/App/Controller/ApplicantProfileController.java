@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.bitlabs.App.Entity.ApplicantProfile;
 import com.bitlabs.App.Entity.JobApplicant;
 import com.bitlabs.App.Repository.JobApplicantRepository;
