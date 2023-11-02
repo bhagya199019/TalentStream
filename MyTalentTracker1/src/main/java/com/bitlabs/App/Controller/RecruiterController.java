@@ -19,7 +19,7 @@ import com.bitlabs.App.Service.RecruiterService;
 public class RecruiterController {
 	
 	@Autowired
-	private RecruiterService recruiterService;
+ private  RecruiterService recruiterService;
 	
 	@Autowired
 	private OtpService otpService;
