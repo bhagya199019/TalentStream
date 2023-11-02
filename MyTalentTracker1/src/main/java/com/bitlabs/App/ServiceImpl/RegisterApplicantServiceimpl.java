@@ -49,4 +49,8 @@ public class RegisterApplicantServiceimpl implements RegisterApplicantService{
 			
 		}
 	
+		public JobApplicant viewApplicantById(Long applicantId) {
+			
+			return jobApplicantRepository.getJobApplicantById(applicantId);
+		}
 }

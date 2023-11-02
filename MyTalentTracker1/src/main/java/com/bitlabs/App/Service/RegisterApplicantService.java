@@ -11,5 +11,6 @@ public interface RegisterApplicantService {
 	public JobApplicant findByEmailAddress(String userEmail);
 	public ResponseEntity<String> saveApplicant(JobApplicant applicant);
 	public List<JobApplicant> getAllApplicants();
+	public JobApplicant viewApplicantById(Long applicantId);
 
 }
