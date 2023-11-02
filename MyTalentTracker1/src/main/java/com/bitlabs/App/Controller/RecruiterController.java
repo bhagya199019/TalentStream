@@ -42,7 +42,8 @@ public class RecruiterController {
 			
 		 }
         else {
-        	 return ResponseEntity.badRequest().body("Email is already  registered.");
+        	 
+        	return ResponseEntity.badRequest().body("Email is already  registered.");
         }
 		
 	}
