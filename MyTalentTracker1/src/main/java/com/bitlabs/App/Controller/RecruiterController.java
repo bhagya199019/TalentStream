@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.bitlabs.App.Entity.JobRecruiter;
 import com.bitlabs.App.Entity.OtpVerification;
 import com.bitlabs.App.Entity.SendOtp;
