@@ -37,10 +37,7 @@ public class ApplicantProfileController {
 		ApplicantProfile createdProfile=applicantProfileService.createOrUpdateProfile(applicantProfile);
 		return ResponseEntity.ok(createdProfile);
 		}
-	
-	
-	
-	
+		
 }
 	
 	

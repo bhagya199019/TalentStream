@@ -20,7 +20,7 @@ import com.bitlabs.App.Entity.SendOtp;
 import com.bitlabs.App.Repository.JobApplicantRepository;
 import com.bitlabs.App.Service.EmailService;
 import com.bitlabs.App.Service.OtpService;
-import com.bitlabs.App.Service.RegisterApplicantService;
+import com.bitlabs.App.Service.ApplicantService;
 
 
 
@@ -29,7 +29,7 @@ import com.bitlabs.App.Service.RegisterApplicantService;
 public class ApplicantController {
 	
 	@Autowired
-    private RegisterApplicantService registerApplicantService;
+    private ApplicantService registerApplicantService;
 	
 	@Autowired
 	private JobApplicantRepository jobApplicantRepository;

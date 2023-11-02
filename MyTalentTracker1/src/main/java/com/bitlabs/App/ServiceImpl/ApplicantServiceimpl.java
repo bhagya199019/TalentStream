@@ -8,14 +8,15 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.bitlabs.App.Entity.JobApplicant;
 import com.bitlabs.App.Repository.JobApplicantRepository;
-import com.bitlabs.App.Service.RegisterApplicantService;
+import com.bitlabs.App.Service.ApplicantService;
 
 
 @Service
-public class RegisterApplicantServiceimpl implements RegisterApplicantService{
+public class ApplicantServiceimpl implements ApplicantService{
 	
 	@Autowired
 	private JobApplicantRepository jobApplicantRepository;
+	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
