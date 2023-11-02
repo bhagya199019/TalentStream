@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bitlabs.App.Entity.JobRecruiter;
+import com.bitlabs.App.Entity.OtpVerification;
 import com.bitlabs.App.Entity.SendOtp;
 import com.bitlabs.App.Service.EmailService;
 import com.bitlabs.App.Service.OtpService;
@@ -44,6 +45,19 @@ public class RecruiterController {
         else {
         	 
         	return ResponseEntity.badRequest().body("Email is already  registered.");
+        }
+		
+	}
+	
+	@PostMapping("/recruiter/verify-otp")
+	 public ResponseEntity<String>verifyOtp(@RequestBody OtpVerification otpVerificationRequest){
+		
+		String otp=otpVerificationRequest.getOtp();
+		String email=otpVerificationRequest.getEmail();
+		if(otpService.validateOtp(otp,email)){
+			 return ResponseEntity.ok("OTP verified successfully");
+        } else {
+            return ResponseEntity.badRequest().body("Incorrect OTP.");
         }
 		
 	}
