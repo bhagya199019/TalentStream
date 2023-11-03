@@ -34,7 +34,7 @@ public ResponseEntity<String> saveRecruiter(JobRecruiter jobRecruiter){
 		jobRecruiter.setPassword(passwordEncoder.encode(jobRecruiter.getPassword()));
 		
 		jobRecruiterRepository.save(jobRecruiter);
-			 return ResponseEntity.ok("Applicant registered successfully");
+			 return ResponseEntity.ok("Recruiter registered successfully");
 			
 	}
 

@@ -63,7 +63,7 @@ public class RecruiterController {
 		
 		String otp=otpVerificationRequest.getOtp();
 		String email=otpVerificationRequest.getEmail();
-		if(otpService.validateOtp(otp,email)){
+		if(otpService.validateOtp(email,otp)){
 			 return ResponseEntity.ok("OTP verified successfully");
         } else {
             return ResponseEntity.badRequest().body("Incorrect OTP.");

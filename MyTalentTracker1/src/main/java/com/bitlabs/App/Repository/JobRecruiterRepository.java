@@ -8,5 +8,6 @@ public interface JobRecruiterRepository extends JpaRepository<JobRecruiter,Long>
 
 	JobRecruiter findByEmail(String recruiterEmail);
 	 boolean existsByEmail(String recruiterEmail);
+	 JobRecruiter findByRecruiterId(Long jobRecruiterId);
 	
 }
