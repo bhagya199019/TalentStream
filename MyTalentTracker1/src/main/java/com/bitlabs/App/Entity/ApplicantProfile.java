@@ -17,7 +17,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToOne;
 import lombok.Data;
 
-@Data
+
 @Entity
 public class ApplicantProfile {
 	
@@ -29,7 +29,7 @@ public class ApplicantProfile {
     private BasicDetails basicDetails;
 
     @Embedded
-    private XclassDetails xClassDetails;
+    private XclassDetails xclassDetails;
 
     @Embedded
     private IntermediateDetails intermediateDetails;

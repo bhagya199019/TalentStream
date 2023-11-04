@@ -11,8 +11,8 @@ public class XclassDetails {
     private String xboard;
     private String xpercentage;
     private String xyearOfPassing;
-    private String xCity;
-    private String xState;
-    private String xPincode;
+    private String xcity;
+    private String xstate;
+    private String xpincode;
     
 }

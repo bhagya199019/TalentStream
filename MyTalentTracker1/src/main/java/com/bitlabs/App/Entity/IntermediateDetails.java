@@ -11,7 +11,7 @@ public class IntermediateDetails {
 	    private String iprogram;
 	    private String ipercentage;
 	    private String iyearOfPassing;
-	    private String iCity;
-	    private String iState;
+	    private String icity;
+	    private String istate;
 
 }
