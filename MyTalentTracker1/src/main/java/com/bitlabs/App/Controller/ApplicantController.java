@@ -161,15 +161,7 @@ public class ApplicantController {
    
    }
    
-   @GetMapping("/applicant/getApplicantById/{applicantId}")
-   public ResponseEntity<JobApplicant> viewApplicantById(Long applicantId){
- 	   
- 	   JobApplicant jobApplicant=registerApplicantService.viewApplicantById(applicantId);
- 	   
- 	   return ResponseEntity.ok(jobApplicant);
-    
-    }
-   
+  
 }   
 
     

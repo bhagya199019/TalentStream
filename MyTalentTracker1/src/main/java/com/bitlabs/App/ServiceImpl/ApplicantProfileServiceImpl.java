@@ -21,11 +21,11 @@ public class ApplicantProfileServiceImpl implements ApplicantProfileService {
 	}
 
 	
-	public ApplicantProfile viewApplicantById(long applicantId) {
-		return applicantProfileRepository.findById((int)applicantId).orElse(null);
+	public ApplicantProfile viewApplicantById(int profileId) {
+		return applicantProfileRepository.findById(profileId).orElse(null);
 	}
 	
-	public void deleteApplicantById(long applicantId) {
-	applicantProfileRepository.deleteById((int)applicantId);
+	public void deleteApplicantById(int  profileId) {
+	applicantProfileRepository.deleteById(profileId);
 	}
 }

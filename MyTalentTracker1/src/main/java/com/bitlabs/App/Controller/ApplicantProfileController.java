@@ -3,6 +3,8 @@ package com.bitlabs.App.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -37,6 +39,24 @@ public class ApplicantProfileController {
 		ApplicantProfile createdProfile=applicantProfileService.createOrUpdateProfile(applicantProfile);
 		return ResponseEntity.ok(createdProfile);
 		}
+      }
+	
+	 @GetMapping("/applicant/getapplicantdetails/{profileid}")
+	   public ResponseEntity<ApplicantProfile> getApplicantProfileById(@PathVariable int profileid) {
+	       ApplicantProfile applicantProfile = applicantProfileService.viewApplicantById(profileid);
+	       if (applicantProfile!= null) {
+	           return ResponseEntity.ok(applicantProfile);
+	       } else {
+	           return ResponseEntity.notFound().build();
+	       }
+	   }
+	      
+	 
+	 @DeleteMapping("/applicant/deletedetails/{applicantId}")
+	       public ResponseEntity<Void> deleteApplicantProfile(@PathVariable int applicantId) {
+	           applicantProfileService.deleteApplicantById(applicantId);
+	           return ResponseEntity.noContent().build();
+	       }
 		
 }
 	
@@ -44,4 +64,5 @@ public class ApplicantProfileController {
 	
 	
 	
-}
+
+
