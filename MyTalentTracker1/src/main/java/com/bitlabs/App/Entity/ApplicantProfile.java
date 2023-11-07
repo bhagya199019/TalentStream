@@ -17,7 +17,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToOne;
 import lombok.Data;
 
-
+@Data
 @Entity
 public class ApplicantProfile {
 	
@@ -65,6 +65,15 @@ public class ApplicantProfile {
 
    @Column(nullable = false)
    private String roles="ROLE_JOBAPPLICANT";
+
+@Override
+public String toString() {
+	return "ApplicantProfile [profileid=" + profileid + ", basicDetails=" + basicDetails + ", xclassDetails="
+			+ xclassDetails + ", intermediateDetails=" + intermediateDetails + ", graduationDetails="
+			+ graduationDetails + ", skillsRequired=" + skillsRequired + ", experienceDetails=" + experienceDetails
+			+ ", applicant=" + applicant + ", roles=" + roles + "]";
+}
+   
 
 
 }

@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.bitlabs.App.Entity.Job;
 import com.bitlabs.App.Entity.JobRecruiter;
 import com.bitlabs.App.Repository.JobRecruiterRepository;
@@ -38,6 +37,7 @@ public class JobController {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Job recruiter with id"+jobRecruiterid+"not found");
 		}
 		
-	 
-}
+	 }
+	
+	
 }

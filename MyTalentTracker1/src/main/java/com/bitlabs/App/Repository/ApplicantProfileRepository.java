@@ -7,5 +7,7 @@ import com.bitlabs.App.Entity.ApplicantProfile;
 
 @Repository
 public interface ApplicantProfileRepository extends JpaRepository<ApplicantProfile,Integer>{
+	
+	ApplicantProfile findByApplicantId(int applicantprofileId);
 
 }
