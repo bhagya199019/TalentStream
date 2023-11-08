@@ -1,7 +1,7 @@
 package com.bitlabs.App.Entity;
 
 import jakarta.persistence.Embeddable;
-import lombok.Data;
+
 
 // @Data
 @Embeddable

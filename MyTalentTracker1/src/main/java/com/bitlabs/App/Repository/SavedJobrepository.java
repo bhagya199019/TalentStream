@@ -10,9 +10,9 @@ import com.bitlabs.App.Entity.SavedJob;
 @Repository
 public interface SavedJobrepository extends JpaRepository<SavedJob,Long>  {
 	
- List<SavedJob>findByApplicantId(Long applicantId);
+ List<SavedJob>findByJobApplicantId(Long applicantId);
 
-boolean existsByApplicantAndJob(JobApplicant jobApplicant, Job job);
+boolean existsByJobApplicantAndJob(JobApplicant jobApplicant, Job job);
 	
 
 }

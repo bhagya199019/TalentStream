@@ -31,14 +31,14 @@ public class SavedJobServiceImpl implements SavedJobService {
 	 }
 	 
 	 else {
-		 if(!savedJobRepository.existsByApplicantAndJob(jobApplicant,job)){
+		 if(!savedJobRepository.existsByJobApplicantAndJob(jobApplicant,job)){
 			 SavedJob savedJob=new SavedJob();
 			 savedJob.setJobApplicant(jobApplicant);
 			 savedJob.setJob(job);
 			 savedJobRepository.save(savedJob);
 			 }
 		 else {
-			 throw new Exception("job has alreadt been saved by the applicant");
+			 throw new Exception("job has already been saved by the applicant");
 		 }
 	 }
 	 

@@ -23,6 +23,8 @@ public class JobController {
 	@Autowired
 	private JobRecruiterRepository jobRecruiterRepository;
 	
+	
+	
 	@PostMapping("/recruiter/post-job/{jobRecruiterid}")
  public ResponseEntity<String> postJob(@RequestBody  @Valid Job job,@PathVariable Long jobRecruiterid){
 		JobRecruiter jobRecruiter=jobRecruiterRepository.findByRecruiterId(jobRecruiterid);
