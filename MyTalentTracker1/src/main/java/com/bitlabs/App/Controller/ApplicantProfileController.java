@@ -30,19 +30,17 @@ public class ApplicantProfileController {
 	
 	
       @PostMapping("/applicant/createProfile/{applicantId}")
-  public ResponseEntity<ApplicantProfile>createOrUpdateProfile(@RequestBody ApplicantProfile applicantProfile,
+  public String createOrUpdateProfile(@RequestBody ApplicantProfile applicantProfile,
 		  @PathVariable long applicantId){
 	
 	JobApplicant jobApplicant=jobApplicantRepository.getJobApplicantById(applicantId);
 	
 	if(jobApplicant==null) {
-		return ResponseEntity.notFound().build();
+		return "Applicant not found";
 	}
 	else {
-		applicantProfile.setApplicant(jobApplicant);
-		ApplicantProfile createdProfile=applicantProfileService.createOrUpdateProfile(applicantProfile);
-		return ResponseEntity.ok(createdProfile);
-		}
+		
+		 return  applicantProfileService.createOrUpdateApplicantProfile(applicantId,applicantProfile);		}
       }
 	
 	/* @GetMapping("/applicant/getapplicantdetails/{profileid}")

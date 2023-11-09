@@ -12,7 +12,7 @@ public class ApplyJobController {
 	
 		
 	
-	 @PostMapping("/applicants/applyjob/{applicantId}/{jobId}")
+	 @PostMapping("/applicant/applyjob/{applicantId}/{jobId}")
 	    public String saveJobForApplicant(
 	            @PathVariable long applicantId,
 	            @PathVariable long jobId
