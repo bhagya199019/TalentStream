@@ -20,6 +20,10 @@ import com.bitlabs.App.Entity.SendOtp;
 import com.bitlabs.App.Repository.JobApplicantRepository;
 import com.bitlabs.App.Service.EmailService;
 import com.bitlabs.App.Service.OtpService;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+
 import com.bitlabs.App.Service.ApplicantService;
 
 
@@ -161,7 +165,19 @@ public class ApplicantController {
    
    }
    
-  
+   @PostMapping("/applicant/signOut")
+   public ResponseEntity<Void> signOut(HttpServletRequest request) {
+       System.out.println("Checking");
+
+       // Get the current session and invalidate it
+       HttpSession session = request.getSession(false);
+       if (session != null) {
+           session.invalidate();
+       }
+
+       return ResponseEntity.noContent().build();
+   }
+
 }   
 
     

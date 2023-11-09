@@ -106,24 +106,9 @@ public class Job {
  
 
     // Constructors, getters, setters, and other properties...
+    
 
- 
-
-    public void addSkillWithMinimumExperience(String skillName, int minimumExperience) {
-
-        RecruiterSkills skill = new  RecruiterSkills();
-
-        skill.setSkillName(skillName);
-
-        skill.setMinimumExperience(minimumExperience);
-
-        skillsRequired.add(skill);
-
-    }
-
- 
-
-    private String jobHighlights;
+private String jobHighlights;
 
     @Column(nullable = false, length = 2000)
 
