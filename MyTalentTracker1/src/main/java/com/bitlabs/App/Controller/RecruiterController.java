@@ -99,8 +99,8 @@ public class RecruiterController {
 
 	}
 	   
-	     @PostMapping("/recruiter/reset-password")
-	     public ResponseEntity<String> resetPassword(@RequestBody NewPasswordRequest request) {
+	  @PostMapping("/recruiter/reset-password")
+ public ResponseEntity<String> resetPassword(@RequestBody NewPasswordRequest request) {
 	         String newPassword = request.getNewPassword();
 	         String confirmPassword = request.getConfirmPassword();
 	         String email = request.getEmail();
@@ -131,7 +131,7 @@ public class RecruiterController {
 
 	 
 	   @PostMapping("/recruiter/login")
-	   public ResponseEntity<String> loginRecruiter(@RequestBody Login request) throws Exception {
+ public ResponseEntity<String> loginRecruiter(@RequestBody Login request) throws Exception {
 		    String email = request.getEmail();
 		    String password = request.getPassword();
 		  JobRecruiter jobRecruiter=jobRecruiterRepository.findByEmail(email);;

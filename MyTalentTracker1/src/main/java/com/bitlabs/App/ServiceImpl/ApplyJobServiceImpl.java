@@ -24,6 +24,7 @@ public class ApplyJobServiceImpl implements ApplyJobservice {
 	private JobApplicantRepository jobApplicantRepository;
 	
 	public String applicantApplyForJob(long applicantId, long jobId) {
+		
 		JobApplicant jobApplicant=jobApplicantRepository.findById(applicantId);
 		Job job=jobRepository.findById(jobId).orElse(null);
 		
