@@ -10,9 +10,7 @@ public class ApplyJobController {
 	@Autowired
 	private ApplyJobservice applyJobService;
 	
-		
-	
-	 @PostMapping("/applicant/applyjob/{applicantId}/{jobId}")
+   @PostMapping("/applicant/applyjob/{applicantId}/{jobId}")
 	    public String saveJobForApplicant(
 	            @PathVariable long applicantId,
 	            @PathVariable long jobId
