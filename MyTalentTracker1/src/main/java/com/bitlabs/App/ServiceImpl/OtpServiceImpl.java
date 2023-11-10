@@ -35,9 +35,9 @@ public class OtpServiceImpl implements OtpService{
         return false;
     }
 	
-    public boolean isEmailAssociatedWithOtp(String userEmail) {
+  /*  public boolean isEmailAssociatedWithOtp(String userEmail) {
         return otpMap.containsKey(userEmail);
-    }
+    }*/
     public boolean isOtpExpired(String userEmail) {
         OtpData otpData = otpMap.get(userEmail);
         if (otpData != null) {

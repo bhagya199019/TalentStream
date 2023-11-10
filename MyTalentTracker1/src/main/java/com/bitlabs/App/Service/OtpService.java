@@ -9,7 +9,7 @@ public interface OtpService {
 	    
 	    boolean validateOtp(String userEmail, String enteredOtp);
 	    
-	    boolean isEmailAssociatedWithOtp(String userEmail);
+	 //   boolean isEmailAssociatedWithOtp(String userEmail);
 	    
 	    boolean isOtpExpired(String userEmail);
 	}

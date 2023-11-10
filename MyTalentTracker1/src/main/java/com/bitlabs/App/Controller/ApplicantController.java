@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -62,7 +63,7 @@ public class ApplicantController {
         }
 
         else {
-        	 return ResponseEntity.badRequest().body("Email is already  registered.");
+        	 return ResponseEntity.badRequest().body("Email is already registered.");
         }
     }
       
@@ -104,42 +105,36 @@ public class ApplicantController {
 	
 	else {
 		
-		return ResponseEntity.badRequest().body("Applicant not registered");
+		return ResponseEntity.badRequest().body(" Applicant email not registered");
 	}
 	
 
 }
    
-     @PostMapping("/applicant/reset-password")
-     public ResponseEntity<String> resetPassword(@RequestBody NewPasswordRequest request) {
-         String newPassword = request.getNewPassword();
-         String confirmPassword = request.getConfirmPassword();
-         String email = request.getEmail();
+     @PostMapping("/applicants/reset-password/{email}")
+	    public ResponseEntity<String> setNewPassword(@RequestBody NewPasswordRequest request, @PathVariable String email) {
+	        String newPassword = request.getNewPassword();
+	        String confirmedPassword = request.getConfirmPassword();
+	        if (email == null) {
+	            return ResponseEntity.badRequest().body("Email not found.");
 
-         if (email == null) {
-             return ResponseEntity.badRequest().body("Email not found");
-         }
-
-         JobApplicant jobApplicant = registerApplicantService.findByEmailAddress(email);
-
-         if (jobApplicant == null) {
-             return ResponseEntity.badRequest().body("User not found");
-         }
-
-         if (!newPassword.equals(confirmPassword)) {
-             return ResponseEntity.badRequest().body("Passwords do not match");
-         }
-
-         // Encode the new password before saving
-         String encodedPassword = passwordEncoder.encode(newPassword);
-         jobApplicant.setPassword(encodedPassword);
-
-         // Save the updated password
-         jobApplicantRepository.save(jobApplicant);
-
-         return ResponseEntity.ok("Password reset done successfully");
-     }
-
+	        }
+	        JobApplicant applicant = registerApplicantService.findByEmailAddress(email);
+	        if (applicant == null) {
+	            return ResponseEntity.badRequest().body("User not found.");
+	        }
+	        if(!(newPassword.equals(confirmedPassword)))
+	        {
+	        	return ResponseEntity.badRequest().body("password not match");
+	        }
+	         // Encode the new password before saving
+	         String encodedPassword = passwordEncoder.encode(newPassword);
+	         applicant.setPassword(encodedPassword);
+	
+	         // Save the updated password
+	         jobApplicantRepository.save(applicant);
+	        return ResponseEntity.ok("Password reset was done successfully");
+	    }
  
    @PostMapping("/applicant/login")
    public ResponseEntity<String> loginApplicant(@RequestBody Login request) throws Exception {
