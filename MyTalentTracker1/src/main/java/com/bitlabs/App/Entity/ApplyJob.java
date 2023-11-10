@@ -1,8 +1,8 @@
 package com.bitlabs.App.Entity;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -16,83 +16,76 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
+import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
 
 @Entity
+@Table(name="Applyjob")
 public class ApplyJob {
-
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long applyJobId;
-	
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long applyjobid;
+ 
 	@ManyToOne
-	@JoinColumn(name="applicantId")
-	private JobApplicant jobApplicant;
-	
-	@ManyToOne
-	@JoinColumn(name="job_id")
-	private Job job;
-	
-	@Column(nullable=false)
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date applicationDate;
-	
-	@Column(nullable=false)
-	private String applicantStatus="New";
-	
-	@OneToMany(mappedBy="applyJob",cascade=CascadeType.ALL)
-	@JsonManagedReference
-   private List<ScheduleInterview>scheduleInterview;
+    @JoinColumn(name = "applicantId")
+    private JobApplicant jobApplicant;
+ 
+    @ManyToOne
+    @JoinColumn(name = "job_id")
+    private Job job;
+    
+   
+ 
+    @Column(nullable = false)
+    private String applicantStatus = "New";
+    
+    @OneToMany(mappedBy = "applyJob", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<ScheduleInterview> scheduleInterviews;
 
-	public Long getApplyJobId() {
-		return applyJobId;
+
+	public List<ScheduleInterview> getScheduleInterviews() {
+		return scheduleInterviews;
 	}
-
-	public void setApplyJobId(Long applyJobId) {
-		this.applyJobId = applyJobId;
+	public void setScheduleInterviews(List<ScheduleInterview> scheduleInterviews) {
+		this.scheduleInterviews = scheduleInterviews;
 	}
+ 
+	public Long getApplyjobid() {
+		return applyjobid;
+	}
+ 
+	public void setApplyjobid(Long applyjobid) {
+		this.applyjobid = applyjobid;
+	}
+ 
 
+ 
 	public JobApplicant getJobApplicant() {
 		return jobApplicant;
 	}
-
-	public void setJobApplicant(JobApplicant jobApplicant) {
+ 
+	public void setJobApplicant(JobApplicant jobapplicant) {
 		this.jobApplicant = jobApplicant;
 	}
-
+ 
 	public Job getJob() {
 		return job;
 	}
-
+ 
 	public void setJob(Job job) {
 		this.job = job;
 	}
-
-	public Date getApplicationDate() {
-		return applicationDate;
-	}
-
-	@PrePersist
-	public void setApplicationDate(Date applicationDate) {
-		this.applicationDate = applicationDate;
-	}
-
 	public String getApplicantStatus() {
-		return applicantStatus;
-	}
+        return applicantStatus;
+    }
 
 	public void setApplicantStatus(String applicantStatus) {
-		this.applicantStatus = applicantStatus;
-	}
+        this.applicantStatus = applicantStatus;
+    }
 
-	public List<ScheduleInterview> getScheduleInterview() {
-		return scheduleInterview;
-	}
-
-	public void setScheduleInterview(List<ScheduleInterview> scheduleInterview) {
-		this.scheduleInterview = scheduleInterview;
-	}
-	
+ 
 }

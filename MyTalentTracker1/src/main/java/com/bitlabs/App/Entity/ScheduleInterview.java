@@ -21,7 +21,6 @@ public class ScheduleInterview {
 	    private String interviewPerson;
 	    private String typeOfInterview;
 	    private int round;
-	    private LocalDateTime timeAndDate;
 	    private String modeOfInterview;
 	    private String location;
 	    private String interviewLink;
@@ -71,13 +70,7 @@ public class ScheduleInterview {
 			this.round = round;
 		}
 
-		public LocalDateTime getTimeAndDate() {
-			return timeAndDate;
-		}
-
-		public void setTimeAndDate(LocalDateTime timeAndDate) {
-			this.timeAndDate = timeAndDate;
-		}
+		
 
 		public String getModeOfInterview() {
 			return modeOfInterview;
@@ -108,14 +101,14 @@ public class ScheduleInterview {
 		}
         
 		public Long getApplyJobId() {
-	        return (applyJob != null) ? applyJob.getApplyJobId() : null;
+	        return (applyJob != null) ? applyJob.getApplyjobid() : null;
 	    }
 		public void setApplyJob(ApplyJob applyJob) {
 			this.applyJob = applyJob;
 		}
 
 		public ScheduleInterview(Long id, String interviewTitle, String interviewPerson, String typeOfInterview,
-				int round, LocalDateTime timeAndDate, String modeOfInterview, String location, String interviewLink,
+				int round, String modeOfInterview, String location, String interviewLink,
 				ApplyJob applyJob) {
 			super();
 			this.id = id;
@@ -123,7 +116,6 @@ public class ScheduleInterview {
 			this.interviewPerson = interviewPerson;
 			this.typeOfInterview = typeOfInterview;
 			this.round = round;
-			this.timeAndDate = timeAndDate;
 			this.modeOfInterview = modeOfInterview;
 			this.location = location;
 			this.interviewLink = interviewLink;

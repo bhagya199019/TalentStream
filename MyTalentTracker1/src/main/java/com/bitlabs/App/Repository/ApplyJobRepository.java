@@ -12,7 +12,7 @@ import com.bitlabs.App.Entity.JobApplicant;
 @Repository
 public interface ApplyJobRepository extends JpaRepository<ApplyJob,Long>{
 
-	List<ApplyJob>findByJobApplicant(long applicantId);
+	List<ApplyJob>findByJobApplicantId(long JobApplicantId);
 	boolean existsByJobApplicantAndJob(JobApplicant applicant, Job job);
 	
 
