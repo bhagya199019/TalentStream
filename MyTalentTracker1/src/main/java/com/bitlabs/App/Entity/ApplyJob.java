@@ -34,11 +34,9 @@ public class ApplyJob {
     private JobApplicant jobApplicant;
  
     @ManyToOne
-    @JoinColumn(name = "job_id")
+    @JoinColumn(name ="job_id")
     private Job job;
     
-   
- 
     @Column(nullable = false)
     private String applicantStatus = "New";
     
