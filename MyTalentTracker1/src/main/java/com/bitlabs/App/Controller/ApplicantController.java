@@ -167,6 +167,7 @@ public class ApplicantController {
    
    @PostMapping("/applicant/signOut")
    public ResponseEntity<Void> signOut(HttpServletRequest request) {
+	   
        System.out.println("Checking");
 
        // Get the current session and invalidate it
