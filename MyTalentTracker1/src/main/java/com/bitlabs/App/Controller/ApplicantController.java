@@ -48,7 +48,7 @@ public class ApplicantController {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
-	private Map<String, Boolean> otpVerificationMap = new HashMap<>();
+	//private Map<String, Boolean> otpVerificationMap = new HashMap<>();
 
     @PostMapping("/applicant/send-otp")
     public ResponseEntity<String> sendOtp(@RequestBody SendOtp  request) {
@@ -58,7 +58,7 @@ public class ApplicantController {
         if (jobApplicant == null) {     
             String otp = otpService.generateOtp(userEmail);
          	            emailService.sendOtpEmail(userEmail, otp);
- 	            otpVerificationMap.put(userEmail, true);
+ 	          //  otpVerificationMap.put(userEmail, true);
  	            return ResponseEntity.ok("OTP sent to your email.");
         }
 
@@ -98,7 +98,7 @@ public class ApplicantController {
 		
 		     String otp=otpService.generateOtp(userEmail);
 		     emailService.sendOtpEmail(userEmail, otp);
-             otpVerificationMap.put(userEmail,true);
+         //    otpVerificationMap.put(userEmail,true);
 		
 		return ResponseEntity.ok("OTP sent to your Email");
 		}
@@ -111,7 +111,7 @@ public class ApplicantController {
 
 }
    
-     @PostMapping("/applicants/reset-password/{email}")
+     @PostMapping("/applicant/reset-password/{email}")
 	    public ResponseEntity<String> setNewPassword(@RequestBody NewPasswordRequest request, @PathVariable String email) {
 	        String newPassword = request.getNewPassword();
 	        String confirmedPassword = request.getConfirmPassword();

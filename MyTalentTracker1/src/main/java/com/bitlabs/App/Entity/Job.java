@@ -1,5 +1,6 @@
 package com.bitlabs.App.Entity;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import jakarta.persistence.CascadeType;
@@ -14,8 +15,9 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
 
+
  @Entity
-// @JsonIgnoreProperties({"jobRecruiters"})
+
 public class Job {
      @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,7 +54,7 @@ public class Job {
 		this.minimumExperience = minimumExperience;
 	}
 
-@Column(nullable = false)
+   @Column(nullable = false)
     private int maximumExperience;
 
  
@@ -108,7 +110,7 @@ public class Job {
     // Constructors, getters, setters, and other properties...
     
 
-private String jobHighlights;
+  private String jobHighlights;
 
     @Column(nullable = false, length = 2000)
 
@@ -307,6 +309,19 @@ public int getMaximumExperience() {
  	public void setUploadDocument(byte[] uploadDocument) {
 		this.uploadDocument = uploadDocument;
 
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "Job [id=" + id + ", jobRecruiter=" + jobRecruiter + ", jobTitle=" + jobTitle + ", minimumExperience="
+				+ minimumExperience + ", maximumExperience=" + maximumExperience + ", maxSalary=" + maxSalary
+				+ ", minSalary=" + minSalary + ", location=" + location + ", employeeType=" + employeeType
+				+ ", industryType=" + industryType + ", minimumQualification=" + minimumQualification
+				+ ", specialization=" + specialization + ", skillsRequired=" + skillsRequired + ", jobHighlights="
+				+ jobHighlights + ", description=" + description + ", uploadDocument=" + Arrays.toString(uploadDocument)
+				+ "]";
 	}
 
 
