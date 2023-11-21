@@ -29,21 +29,17 @@ public interface JobRepository extends JpaRepository<Job,Long>  {
 		       "AND (:employeeType IS NULL OR LOWER(j.employeeType) LIKE LOWER(CONCAT('%', :employeeType, '%'))) " +
 		       "AND (:industryType IS NULL OR LOWER(j.industryType) LIKE LOWER(CONCAT('%', :industryType, '%'))) " +
 		       "AND (:minimumQualification IS NULL OR LOWER(j.minimumQualification) LIKE LOWER(CONCAT('%', :minimumQualification, '%'))) " +
-		       "AND (:specialization IS NULL OR LOWER(j.specialization) LIKE LOWER(CONCAT('%', :specialization, '%')))" +
-	           " AND (:skillName IS NULL OR LOWER(s.skillName) LIKE LOWER(CONCAT('%', :skillName, '%')))")
-	List<Job> searchJobsByFilters(
-	    @Param("jobTitle") String jobTitle,
-	    @Param("id") Long id,
-	    @Param("minExperience") Integer minExperience,
-	    @Param("maxExperience") Integer maxExperience,
-	    @Param("maxSalary") Double maxSalary,
-	    @Param("location") String location,
-	    @Param("employeeType") String employeeType,
-	    @Param("industryType") String industryType,
-	    @Param("minimumQualification") String minimumQualification,
-	    @Param("specialization") String specialization,
-	    @Param("skillName") String skillName);
-
-		
+		       "AND (:specialization IS NULL OR LOWER(j.specialization) LIKE LOWER(CONCAT('%', :specialization, '%')))")
+		List<Job> searchJobsByFilters(
+		    @Param("jobTitle") String jobTitle,
+		    @Param("id") Long id,
+		    @Param("minExperience") Integer minExperience,
+		    @Param("maxExperience") Integer maxExperience,
+		    @Param("maxSalary") Double maxSalary,
+		    @Param("location") String location,
+		    @Param("employeeType") String employeeType,
+		    @Param("industryType") String industryType,
+		    @Param("minimumQualification") String minimumQualification,
+		    @Param("specialization") String specialization);
 	
 }

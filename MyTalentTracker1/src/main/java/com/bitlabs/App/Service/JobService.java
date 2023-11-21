@@ -14,7 +14,7 @@ public interface JobService {
 	// public List<Job> searchJobsByKeyword(
 	//		    String keyword, Long id, Integer minExperience, Integer maxExperience, Double maxSalary);
 	 
-	 List<Job> searchJobsByFilters(
+	 public List<Job> searchJobsByFilters(
 		        String jobTitle,
 		        Long id,
 		        Integer minExperience,
@@ -24,8 +24,6 @@ public interface JobService {
 		        String employeeType,
 		        String industryType,
 		        String minimumQualification,
-		        String specialization,
-		        String skillName
+		        String specialization
 		    );
-	
 }

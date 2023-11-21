@@ -46,8 +46,7 @@ public class JobServiceImpl implements JobService {
 		        String employeeType,
 		        String industryType,
 		        String minimumQualification,
-		        String specialization,
-		        String skillName
+		        String specialization
 		    ) {
 		        return jobRepository.searchJobsByFilters(
 		            jobTitle,
@@ -59,9 +58,9 @@ public class JobServiceImpl implements JobService {
 		            employeeType,
 		            industryType,
 		            minimumQualification,
-		            specialization,
-		            skillName
+		            specialization
 		        );
 		    }
-	 
+	
 }
+

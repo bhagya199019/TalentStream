@@ -43,22 +43,7 @@ public class ApplicantProfileController {
 		 return  applicantProfileService.createOrUpdateApplicantProfile(applicantId,applicantProfile);		}
       }
 	
-	/* @GetMapping("/applicant/getapplicantdetails/{profileid}")
-	   public ResponseEntity<ApplicantProfile> getApplicantProfileById(@PathVariable int profileid) {
-	       ApplicantProfile applicantProfile = applicantProfileService.viewApplicantById(profileid);
-	       if (applicantProfile!= null) {
-	           return ResponseEntity.ok(applicantProfile);
-	       } else {
-	           return ResponseEntity.notFound().build();
-	       }
-	   }
-	 
-	 @GetMapping("/applicant/getapplicantProfileDetails/{profileid}")
-	    public ResponseEntity<ApplicantProfile> getRecruiterProfileById(@PathVariable int profileid) {
-	        Optional<ApplicantProfile> applicantProfile =applicantProfileService.viewApplicantById(profileid);
-	        return applicantProfile.map(profile -> new ResponseEntity<>(profile, HttpStatus.OK))
-	                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
-	    }*/
+	
       
       @GetMapping("/applicant/getapplicantProfileDetails/{profileid}")
       public ResponseEntity<Optional<ApplicantProfile>> getApplicantProfileDetails(@PathVariable int profileid) {

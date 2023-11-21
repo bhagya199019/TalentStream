@@ -98,18 +98,15 @@ public ResponseEntity<List<Job>> searchJobsByKeyword(
 	    @RequestParam(value = "employeeType", required = false) String employeeType,
 	    @RequestParam(value = "industryType", required = false) String industryType,
 	    @RequestParam(value = "minimumQualification", required = false) String minimumQualification,
-	    @RequestParam(value = "specialization", required = false) String specialization,
-	    @RequestParam(value = "skillName", required = false) String skillName
-	    ) {
-
+	    @RequestParam(value = "specialization", required = false) String specialization) {
+ 
 	    List<Job> jobs = jobService.searchJobsByFilters(
 	        jobTitle, id, minExperience, maxExperience, maxSalary, location, employeeType, industryType,
-	        minimumQualification, specialization,skillName);
+	        minimumQualification, specialization);
 	    System.out.println(jobs);
-
+ 
 	    return ResponseEntity.ok(jobs);
 	}
-
 
  	    
  	}
