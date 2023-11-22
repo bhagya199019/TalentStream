@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bitlabs.App.DTO.OtpVerificationDTO;
-import com.bitlabs.App.DTO.SendOtpDTO;
 import com.bitlabs.App.Entity.JobRecruiter;
 import com.bitlabs.App.Entity.Login;
 import com.bitlabs.App.Entity.NewPasswordRequest;
@@ -19,6 +17,8 @@ import com.bitlabs.App.Repository.JobRecruiterRepository;
 import com.bitlabs.App.Service.EmailService;
 import com.bitlabs.App.Service.OtpService;
 import com.bitlabs.App.Service.RecruiterService;
+import com.bitlabs.App.dto.OtpVerificationDTO;
+import com.bitlabs.App.dto.SendOtpDTO;
 
 @RestController
 public class RecruiterController {

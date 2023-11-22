@@ -14,14 +14,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bitlabs.App.DTO.OtpVerificationDTO;
-import com.bitlabs.App.DTO.SendOtpDTO;
 import com.bitlabs.App.Entity.JobApplicant;
 import com.bitlabs.App.Entity.Login;
 import com.bitlabs.App.Entity.NewPasswordRequest;
 import com.bitlabs.App.Repository.JobApplicantRepository;
 import com.bitlabs.App.Service.EmailService;
 import com.bitlabs.App.Service.OtpService;
+import com.bitlabs.App.dto.OtpVerificationDTO;
+import com.bitlabs.App.dto.SendOtpDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;

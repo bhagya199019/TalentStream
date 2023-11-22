@@ -1,4 +1,4 @@
-package com.bitlabs.App.DTO;
+package com.bitlabs.App.dto;
 
 public class OtpVerificationDTO {
 
