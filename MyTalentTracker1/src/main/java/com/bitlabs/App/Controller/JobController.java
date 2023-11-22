@@ -46,22 +46,8 @@ public class JobController {
 		
 	 }
 	
-/*  @GetMapping("/recruiter/search")
-    public ResponseEntity<List<Job>> searchJobsByKeyword(@RequestParam("keyword") String keyword) {
-        List<Job> jobs = jobService.searchJobsByKeyword(keyword);
-        System.out.println(jobs);
-        return ResponseEntity.ok(jobs);
-    }
-	
-	
-	@GetMapping("/recruiter/search")
-	public ResponseEntity<List<JobDTO>> searchJobsByKeyword(@RequestParam("keyword") String keyword) {
-	    List<Job> jobs = jobService.searchJobsByKeyword(keyword);
-	    List<JobDTO> jobDTOs = JobMapper.mapToDTOs(jobs);
-	    return ResponseEntity.ok(jobDTOs);
-	}
-	
-	
+
+/*	
  	@GetMapping("/recruiters/search")
 	public ResponseEntity<List<Job>> searchJobsByKeywordAndjobId(
 	    @RequestParam("keyword") String keyword,@RequestParam(value = "id", required = false) Long jobId)
