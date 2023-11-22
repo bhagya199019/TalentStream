@@ -1,9 +1,9 @@
-package com.bitlabs.App.Entity;
+package com.bitlabs.App.DTO;
 
 import lombok.Data;
 
 @Data
-public class SendOtp {
+public class SendOtpDTO {
 
 	private String email;
 

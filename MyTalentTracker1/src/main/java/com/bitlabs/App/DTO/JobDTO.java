@@ -1,4 +1,4 @@
-package com.bitlabs.App.Entity;
+package com.bitlabs.App.DTO;
 
 import jakarta.validation.constraints.Min;
 import lombok.Data;

@@ -9,11 +9,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.bitlabs.App.DTO.OtpVerificationDTO;
+import com.bitlabs.App.DTO.SendOtpDTO;
 import com.bitlabs.App.Entity.JobRecruiter;
 import com.bitlabs.App.Entity.Login;
 import com.bitlabs.App.Entity.NewPasswordRequest;
-import com.bitlabs.App.Entity.OtpVerification;
-import com.bitlabs.App.Entity.SendOtp;
 import com.bitlabs.App.Repository.JobRecruiterRepository;
 import com.bitlabs.App.Service.EmailService;
 import com.bitlabs.App.Service.OtpService;
@@ -40,7 +41,7 @@ public class RecruiterController {
 	 private Map<String, Boolean> otpVerificationMap = new HashMap<>();
 	
 	@PostMapping("/recruiter/send-otp")
- public ResponseEntity<String>sendOtp(@RequestBody SendOtp sendOtpRequest){
+ public ResponseEntity<String>sendOtp(@RequestBody SendOtpDTO sendOtpRequest){
 		
 		String recruiterEmail=sendOtpRequest.getEmail();
 		JobRecruiter jobRecruiter=recruiterService.findByEmailAddress(recruiterEmail);
@@ -59,7 +60,7 @@ public class RecruiterController {
 	}
 	
 	@PostMapping("/recruiter/verify-otp")
-	 public ResponseEntity<String>verifyOtp(@RequestBody OtpVerification otpVerificationRequest){
+	 public ResponseEntity<String>verifyOtp(@RequestBody OtpVerificationDTO otpVerificationRequest){
 		
 		String otp=otpVerificationRequest.getOtp();
 		String email=otpVerificationRequest.getEmail();
@@ -78,7 +79,7 @@ public class RecruiterController {
 	
 	
 	@PostMapping("/recruiter/forgotPassword/send-Otp")
-	  public ResponseEntity<String> ForgotPasswordSendOtp(@RequestBody SendOtp  request){
+	  public ResponseEntity<String> ForgotPasswordSendOtp(@RequestBody SendOtpDTO  request){
 		  String recruiterEmail=request.getEmail();
 		  JobRecruiter jobRecruiter=recruiterService.findByEmailAddress(recruiterEmail);
 		

@@ -13,11 +13,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.bitlabs.App.DTO.OtpVerificationDTO;
+import com.bitlabs.App.DTO.SendOtpDTO;
 import com.bitlabs.App.Entity.JobApplicant;
 import com.bitlabs.App.Entity.Login;
 import com.bitlabs.App.Entity.NewPasswordRequest;
-import com.bitlabs.App.Entity.OtpVerification;
-import com.bitlabs.App.Entity.SendOtp;
 import com.bitlabs.App.Repository.JobApplicantRepository;
 import com.bitlabs.App.Service.EmailService;
 import com.bitlabs.App.Service.OtpService;
@@ -51,7 +52,7 @@ public class ApplicantController {
 	//private Map<String, Boolean> otpVerificationMap = new HashMap<>();
 
     @PostMapping("/applicant/send-otp")
-    public ResponseEntity<String> sendOtp(@RequestBody SendOtp  request) {
+    public ResponseEntity<String> sendOtp(@RequestBody SendOtpDTO  request) {
         String userEmail = request.getEmail();
         
         JobApplicant jobApplicant = registerApplicantService.findByEmailAddress(userEmail);
@@ -68,7 +69,7 @@ public class ApplicantController {
     }
       
     @PostMapping("/applicant/verify-otp")
-  public ResponseEntity<String> verifyOtp( @RequestBody  OtpVerification verificationRequest) {
+  public ResponseEntity<String> verifyOtp( @RequestBody  OtpVerificationDTO verificationRequest) {
         String otp=verificationRequest.getOtp();
         String email=verificationRequest.getEmail();
       //  System.out.println(otp+email);
@@ -90,7 +91,7 @@ public class ApplicantController {
  
   
      @PostMapping("/applicant/forgotPassword/send-Otp")
-  public ResponseEntity<String> ForgotPasswordSendOtp(@RequestBody SendOtp  request){
+  public ResponseEntity<String> ForgotPasswordSendOtp(@RequestBody SendOtpDTO  request){
 	  String userEmail=request.getEmail();
 	  JobApplicant jobApplicant=registerApplicantService.findByEmailAddress(userEmail);
 	

@@ -1,6 +1,6 @@
-package com.bitlabs.App.Entity;
+package com.bitlabs.App.DTO;
 
-public class OtpVerification {
+public class OtpVerificationDTO {
 
 	private String otp;
     private String email;
@@ -17,12 +17,12 @@ public class OtpVerification {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public OtpVerification(String otp, String email) {
+	public OtpVerificationDTO(String otp, String email) {
 		super();
 		this.otp = otp;
 		this.email = email;
 	}
-	public OtpVerification() {
+	public OtpVerificationDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
