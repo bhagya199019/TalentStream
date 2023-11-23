@@ -3,7 +3,9 @@ package com.bitlabs.App.Entity;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
@@ -20,10 +22,14 @@ import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
-
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="Applyjob")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ApplyJob {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,7 +39,8 @@ public class ApplyJob {
     @JoinColumn(name = "applicantId")
     private JobApplicant jobApplicant;
  
-    @ManyToOne
+
+	@ManyToOne
     @JoinColumn(name ="job_id")
     private Job job;
     
@@ -45,45 +52,9 @@ public class ApplyJob {
     private List<ScheduleInterview> scheduleInterviews;
 
 
-	public List<ScheduleInterview> getScheduleInterviews() {
-		return scheduleInterviews;
-	}
-	public void setScheduleInterviews(List<ScheduleInterview> scheduleInterviews) {
-		this.scheduleInterviews = scheduleInterviews;
-	}
- 
-	public Long getApplyjobid() {
-		return applyjobid;
-	}
- 
-	public void setApplyjobid(Long applyjobid) {
-		this.applyjobid = applyjobid;
-	}
- 
-
- 
-	public JobApplicant getJobApplicant() {
-		return jobApplicant;
-	}
- 
-	public void setJobApplicant(JobApplicant jobapplicant) {
-		this.jobApplicant = jobApplicant;
-	}
- 
-	public Job getJob() {
-		return job;
-	}
- 
-	public void setJob(Job job) {
-		this.job = job;
-	}
-	public String getApplicantStatus() {
-        return applicantStatus;
-    }
-
-	public void setApplicantStatus(String applicantStatus) {
-        this.applicantStatus = applicantStatus;
-    }
-
- 
+	 @Override
+		public String toString() {
+			return "ApplyJob [applyjobid=" + applyjobid + ", jobApplicant=" + jobApplicant + ", job=" + job
+					+ ", applicantStatus=" + applicantStatus + ", scheduleInterviews=" + scheduleInterviews + "]";
+		}
 }

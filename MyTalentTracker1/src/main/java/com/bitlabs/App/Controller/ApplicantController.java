@@ -116,10 +116,7 @@ public class ApplicantController {
 	    public ResponseEntity<String> setNewPassword(@RequestBody NewPasswordRequest request, @PathVariable String email) {
 	        String newPassword = request.getNewPassword();
 	        String confirmedPassword = request.getConfirmPassword();
-	        if (email == null) {
-	            return ResponseEntity.badRequest().body("Email not found.");
-
-	        }
+	        
 	        JobApplicant applicant = registerApplicantService.findByEmailAddress(email);
 	        if (applicant == null) {
 	            return ResponseEntity.badRequest().body("User not found.");

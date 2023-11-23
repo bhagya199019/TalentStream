@@ -1,4 +1,4 @@
-package com.bitlabs.App.dto;
+/*package com.bitlabs.App.dto;
 
 import jakarta.validation.constraints.Min;
 import lombok.Data;
@@ -49,4 +49,4 @@ public class JobDTO {
 	
     
     
-}
+}*/

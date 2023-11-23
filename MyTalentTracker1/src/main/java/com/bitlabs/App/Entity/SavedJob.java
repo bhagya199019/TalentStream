@@ -18,7 +18,7 @@ public class SavedJob {
     private Long id;
 
 	@ManyToOne
-    @JoinColumn(name = "applicantregistration_id")
+    @JoinColumn(name = "applicant_id")
     private JobApplicant jobApplicant;
 
     @ManyToOne

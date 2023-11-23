@@ -1,6 +1,6 @@
 package com.bitlabs.App.Entity;
 
-import java.util.List;
+/*import java.util.List;
 import java.util.stream.Collectors;
 
 import com.bitlabs.App.dto.JobDTO;
@@ -31,4 +31,4 @@ public class JobMapper {
 	            return jobs.stream().map(JobMapper::mapToDTO).collect(Collectors.toList());
 	        }
 
-}
+}*/
