@@ -27,12 +27,11 @@ public class ApplicantProfileServiceImpl implements ApplicantProfileService {
 	        if (existingProfile == null) {
 	        	applicantProfile.setApplicant(jobApplicant);
 	        	applicantProfileRepository.save(applicantProfile);
-	        	System.out.println("Profile saved successfully");
 	        	return "Profile saved successfully";
 	              
 	              
 	        } else {
-	        	System.out.println("your Profile was updated already");
+	        	
 	            return "your Profile was updated already"; // Profile for this applicant already exists
 	        }
 	    }

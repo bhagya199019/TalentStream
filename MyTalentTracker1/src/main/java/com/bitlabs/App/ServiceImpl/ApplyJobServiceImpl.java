@@ -71,7 +71,7 @@ public String applicantApplyForJob(long applicantId, long jobId) {
 		 
 		private AppliedApplicantInfoDto mapToDTO(AppliedApplicantInfo appliedApplicantInfo) {
 		    AppliedApplicantInfoDto dto = new AppliedApplicantInfoDto();
-		    dto. setApplyjobid(appliedApplicantInfo.getApplyjobid());
+		    dto.setApplyjobid(appliedApplicantInfo.getApplyjobid());
 		    dto.setName(appliedApplicantInfo.getName());
 		    dto.setEmail(appliedApplicantInfo.getEmail());
 		    dto.setMobilenumber(appliedApplicantInfo.getMobilenumber());
@@ -92,10 +92,10 @@ public String applicantApplyForJob(long applicantId, long jobId) {
 		          List<ApplyJob> appliedJobs = applyJobRepository.findByJobApplicantId(applicantId);
 	 
 		          for (ApplyJob appliedJobs1 : appliedJobs) {
-		              result.add(appliedJobs1 .getJob());
+		              result.add(appliedJobs1.getJob());
 		          }
 	 
-		      } catch (Exception e) {
+		      } catch(Exception e) {
 		    	  e.printStackTrace();
 		      }
 	 
