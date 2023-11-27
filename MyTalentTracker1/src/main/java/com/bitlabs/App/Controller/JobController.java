@@ -47,32 +47,7 @@ public class JobController {
 	 }
 	
 
-/*	
- 	@GetMapping("/recruiters/search")
-	public ResponseEntity<List<Job>> searchJobsByKeywordAndjobId(
-	    @RequestParam("keyword") String keyword,@RequestParam(value = "id", required = false) Long jobId)
-	     {
-	    List<Job> jobs = jobService.searchJobsByKeywordAndjobId(keyword,jobId);
-	    System.out.println(jobs);
-	 //   List<JobDTO> jobDTOs = JobMapper.mapToDTOs(jobs);
-	    return ResponseEntity.ok(jobs);
-	}
-  
- 	
- 	@GetMapping("/recruiter/search")
-public ResponseEntity<List<Job>> searchJobsByKeyword(
-    @RequestParam(value = "keyword", required = false) String keyword,
-    @RequestParam(value = "id", required = false) Long id,
-    @RequestParam(value = "minExperience", required = false) Integer minExperience,
-    @RequestParam(value = "maxExperience", required = false) Integer maxExperience,
-    @RequestParam(value = "maxSalary", required = false) Double maxSalary) {
 
-    List<Job> jobs = jobService.searchJobsByKeyword(keyword, id, minExperience, maxExperience, maxSalary);
-    System.out.println(jobs);
-
-    return ResponseEntity.ok(jobs);
-} */
-	
 	@GetMapping("/recruiter/search")
 	public ResponseEntity<List<Job>> searchJobsByFilters(
 	    @RequestParam(value = "jobTitle", required = false) String jobTitle,

@@ -149,14 +149,6 @@ public class ApplicantController {
 	    }
 	}
 
-   @GetMapping("/applicant/viewAllApplicants")
-  public ResponseEntity<List<JobApplicant>> viewApplicants(){
-	   
-	   List <JobApplicant> jobApplicants=registerApplicantService.getAllApplicants();
-	   
-	   return ResponseEntity.ok(jobApplicants);
-   
-   }
    
    @PostMapping("/applicant/signOut")
    public ResponseEntity<Void> signOut(HttpServletRequest request) {

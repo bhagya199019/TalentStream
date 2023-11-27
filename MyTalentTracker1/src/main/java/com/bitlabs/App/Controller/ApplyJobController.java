@@ -54,9 +54,7 @@ public class ApplyJobController {
    
    
    @PostMapping("/recruiter/applyjob-update-status/{applyJobId}/{newStatus}")
-   public ResponseEntity<String> updateApplicantStatus(
-           @PathVariable Long applyJobId,
-           @PathVariable String newStatus) {
+   public ResponseEntity<String> updateApplicantStatus(@PathVariable Long applyJobId, @PathVariable String newStatus) {
        String updateMessage = applyJobService.updateApplicantStatus(applyJobId, newStatus);
        return ResponseEntity.ok(updateMessage);
    }
