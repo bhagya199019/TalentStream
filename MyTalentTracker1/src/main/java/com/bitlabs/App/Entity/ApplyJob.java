@@ -40,7 +40,7 @@ public class ApplyJob {
     
     @OneToMany(mappedBy = "applyJob", cascade = CascadeType.ALL)
     @JsonManagedReference
-    private List<ScheduleInterview> scheduleInterviews;
+    private List<ScheduleInterview>scheduleInterviews;
 
 
 	 @Override

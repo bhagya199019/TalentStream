@@ -104,7 +104,7 @@ public String applicantApplyForJob(long applicantId, long jobId) {
 
 	
 public String updateApplicantStatus(Long applyJobId, String newStatus) {
-	    ApplyJob applyJob = applyJobRepository.findById(applyJobId)
+	    ApplyJob applyJob=applyJobRepository.findById(applyJobId)
 	            .orElseThrow();
 	 
 	    applyJob.setApplicantStatus(newStatus);
