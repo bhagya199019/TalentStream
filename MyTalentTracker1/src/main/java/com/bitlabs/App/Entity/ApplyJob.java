@@ -27,9 +27,8 @@ public class ApplyJob {
 	private Long applyjobid;
  
 	@ManyToOne
-    @JoinColumn(name = "applicantId")
+    @JoinColumn(name = "applicant_id")
     private JobApplicant jobApplicant;
- 
 
 	@ManyToOne
     @JoinColumn(name ="job_id")

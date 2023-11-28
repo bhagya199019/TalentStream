@@ -27,7 +27,6 @@ import jakarta.persistence.JoinColumn;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class Job {
      @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

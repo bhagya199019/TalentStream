@@ -1,6 +1,6 @@
 package com.bitlabs.App.dto;
 
-public class AppliedApplicantInfoDto {
+public class AppliedApplicantInfoDTO {
 	
 	private Long applyjobid;
     private String name;
@@ -72,7 +72,7 @@ public class AppliedApplicantInfoDto {
 	public void setLocation(String location) {
 		this.location = location;
 	}
-	public AppliedApplicantInfoDto() {
+	public AppliedApplicantInfoDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}

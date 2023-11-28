@@ -30,5 +30,26 @@ public interface ApplyJobRepository extends JpaRepository<ApplyJob,Long>{
 		       "WHERE r.id = :jobRecruiterId")
 	    List<AppliedApplicantInfo> findAppliedApplicantsInfo(@Param("jobRecruiterId") long jobRecruiterId);
 	
+	
+	
+	    List<ApplyJob> findByJobApplicantIdAndApplicantStatus(long jobApplicantId, String applicantStatus);
 
-}
+	    @Query("SELECT NEW com.bitlabs.App.Entity.AppliedApplicantInfo(" +
+	           " aj.applyjobid, a.name, a.email, a.mobilenumber, j.jobTitle, aj.applicantStatus, " +
+	           " j.minimumExperience, s.skillName, " +
+	           " j.minimumQualification, j.location) " +
+	           "FROM ApplyJob aj " +
+	           "INNER JOIN aj.jobApplicant a " +
+	           "INNER JOIN aj.job j " +
+	           "INNER JOIN j.skillsRequired s " +
+	           "WHERE a.id = :applicantId " +
+	           "AND aj.applicantStatus = :applicantStatus")
+	    List<AppliedApplicantInfo> findApplicantsInfoByStatus(
+	    		@Param("applicantId") long applicantId,
+	            @Param("applicantStatus") String applicantStatus
+	    );
+	}
+
+	
+
+

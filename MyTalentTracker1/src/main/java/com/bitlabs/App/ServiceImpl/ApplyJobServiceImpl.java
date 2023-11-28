@@ -1,5 +1,6 @@
 package com.bitlabs.App.ServiceImpl;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,8 +14,10 @@ import com.bitlabs.App.Entity.JobApplicant;
 import com.bitlabs.App.Repository.ApplyJobRepository;
 import com.bitlabs.App.Repository.JobApplicantRepository;
 import com.bitlabs.App.Repository.JobRepository;
+import com.bitlabs.App.Repository.ScheduleInterviewRepository;
 import com.bitlabs.App.Service.ApplyJobservice;
-import com.bitlabs.App.dto.AppliedApplicantInfoDto;
+import com.bitlabs.App.dto.ApplicantJobInterviewDTO;
+import com.bitlabs.App.dto.AppliedApplicantInfoDTO;
 
 @Service
 public class ApplyJobServiceImpl implements ApplyJobservice {
@@ -27,6 +30,9 @@ public class ApplyJobServiceImpl implements ApplyJobservice {
 	
 	@Autowired
 	private JobApplicantRepository jobApplicantRepository;
+	
+	@Autowired
+	private ScheduleInterviewRepository scheduleInterviewRepository;
 	
 public String applicantApplyForJob(long applicantId, long jobId) {
 		JobApplicant jobApplicant=jobApplicantRepository.findById(applicantId);
@@ -55,12 +61,12 @@ public String applicantApplyForJob(long applicantId, long jobId) {
 	}
 	
 	
-	public List<AppliedApplicantInfoDto> getAppliedApplicants(long jobRecruiterId) {
+	public List<AppliedApplicantInfoDTO> getAppliedApplicants(long jobRecruiterId) {
 		List<AppliedApplicantInfo> appliedApplicants = applyJobRepository.findAppliedApplicantsInfo(jobRecruiterId);
 		 
-		List<AppliedApplicantInfoDto> dtoList = new ArrayList<>();
+		List<AppliedApplicantInfoDTO> dtoList = new ArrayList<>();
 		for (AppliedApplicantInfo appliedApplicantInfo : appliedApplicants) {
-		    AppliedApplicantInfoDto dto = mapToDTO(appliedApplicantInfo);
+		    AppliedApplicantInfoDTO dto = mapToDTO(appliedApplicantInfo);
 		    dtoList.add(dto);
 		}
 		 
@@ -69,8 +75,8 @@ public String applicantApplyForJob(long applicantId, long jobId) {
 		 
 		 
 		 
-		private AppliedApplicantInfoDto mapToDTO(AppliedApplicantInfo appliedApplicantInfo) {
-		    AppliedApplicantInfoDto dto = new AppliedApplicantInfoDto();
+		private AppliedApplicantInfoDTO mapToDTO(AppliedApplicantInfo appliedApplicantInfo) {
+		    AppliedApplicantInfoDTO dto = new AppliedApplicantInfoDTO();
 		    dto.setApplyjobid(appliedApplicantInfo.getApplyjobid());
 		    dto.setName(appliedApplicantInfo.getName());
 		    dto.setEmail(appliedApplicantInfo.getEmail());
@@ -112,4 +118,28 @@ public String updateApplicantStatus(Long applyJobId, String newStatus) {
 	 
 	    return "Applicant status updated to: " + newStatus;
 	}
+
+
+/* public List<ApplicantJobInterviewDTO> getApplicantJobInterviewInfoForRecruiterAndStatus(
+        long recruiterId, String applicantStatus) {
+    return scheduleInterviewRepository.getApplicantJobInterviewInfoByRecruiterAndStatus(recruiterId, applicantStatus);
 }
+ 
+
+public List<ApplicantJobInterviewDTO> getApplicantJobInterviewInfoForApplicantAndStatus(long applicantId, String applicantStatus) {
+    System.out.println("ApplicantId: " + applicantId);
+    System.out.println("ApplicantStatus: " + applicantStatus);
+
+    List<ApplicantJobInterviewDTO> result = scheduleInterviewRepository.getApplicantJobInterviewInfoByApplicantAndStatus(applicantId, applicantStatus);
+    System.out.println("Query Result: " + result);
+
+    return result;
+}*/
+
+public List<AppliedApplicantInfo> getApplicantsInfoByStatus(long applicantId,String applicantStatus) {
+    return applyJobRepository.findApplicantsInfoByStatus(applicantId, applicantStatus);
+}
+
+}
+
+
