@@ -43,7 +43,8 @@ public class ApplicantServiceimpl implements ApplicantService{
 			
 	}
 	
-		public List<JobApplicant> getAllApplicants(){
+	
+	public List<JobApplicant> getAllApplicants(){
 			
 			return jobApplicantRepository.findAll();
 			

@@ -25,5 +25,7 @@ public interface ApplyJobservice {
 	        */
 	
 	
-	public List<AppliedApplicantInfo> getApplicantsInfoByStatus(long applicantId,String applicantStatus);
+	public List<AppliedApplicantInfo> getApplicantInfoByStatus(long applicantId,String applicantStatus);
+	
+	public List<AppliedApplicantInfo> getApplicantInfoByApplyJobId(long applyJobId);
 }

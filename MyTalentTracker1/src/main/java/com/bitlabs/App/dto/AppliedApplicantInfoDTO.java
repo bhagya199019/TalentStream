@@ -1,5 +1,12 @@
 package com.bitlabs.App.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class AppliedApplicantInfoDTO {
 	
 	private Long applyjobid;
@@ -12,70 +19,7 @@ public class AppliedApplicantInfoDTO {
     private String skillName;
     private String minimumQualification;
     private String location;
-	public Long getApplyjobid() {
-		return applyjobid;
-	}
-	public void setApplyjobid(Long applyjobid) {
-		this.applyjobid = applyjobid;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public String getMobilenumber() {
-		return mobilenumber;
-	}
-	public void setMobilenumber(String mobilenumber) {
-		this.mobilenumber = mobilenumber;
-	}
-	public String getJobTitle() {
-		return jobTitle;
-	}
-	public void setJobTitle(String jobTitle) {
-		this.jobTitle = jobTitle;
-	}
-	public String getApplicantStatus() {
-		return applicantStatus;
-	}
-	public void setApplicantStatus(String applicantStatus) {
-		this.applicantStatus = applicantStatus;
-	}
-	public int getMinimumExperience() {
-		return minimumExperience;
-	}
-	public void setMinimumExperience(int minimumExperience) {
-		this.minimumExperience = minimumExperience;
-	}
-	public String getSkillName() {
-		return skillName;
-	}
-	public void setSkillName(String skillName) {
-		this.skillName = skillName;
-	}
-	public String getMinimumQualification() {
-		return minimumQualification;
-	}
-	public void setMinimumQualification(String minimumQualification) {
-		this.minimumQualification = minimumQualification;
-	}
-	public String getLocation() {
-		return location;
-	}
-	public void setLocation(String location) {
-		this.location = location;
-	}
-	public AppliedApplicantInfoDTO() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	
     
     
 

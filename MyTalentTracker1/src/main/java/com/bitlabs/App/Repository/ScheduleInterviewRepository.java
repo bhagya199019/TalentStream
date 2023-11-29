@@ -9,9 +9,21 @@ import org.springframework.stereotype.Repository;
 
 import com.bitlabs.App.Entity.ScheduleInterview;
 import com.bitlabs.App.dto.ApplicantJobInterviewDTO;
+import com.bitlabs.App.dto.InterviewFeedbackUpdateDTO;
 
 @Repository
 public interface ScheduleInterviewRepository extends JpaRepository<ScheduleInterview, Long>{
+	
+	
+	@Query("SELECT NEW com.bitlabs.App.dto.InterviewFeedbackUpdateDTO(" +
+	        "i.id, i.interviewFeedback, i.interviewStatus) " +
+	        "FROM ApplyJob aj " +
+	        "JOIN aj.scheduleInterviews i " +
+	        "WHERE aj.jobApplicant.id = :applicantId")
+	List<InterviewFeedbackUpdateDTO> findFeedbackByApplicantId(@Param("applicantId") long applicantId);
+
+   
+
 	
 	/*
 	// Define custom query methods if needed

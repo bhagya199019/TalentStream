@@ -7,9 +7,10 @@ import com.bitlabs.App.Entity.JobRecruiter;
 import com.bitlabs.App.Entity.TeamMember;
 import com.bitlabs.App.Repository.JobRecruiterRepository;
 import com.bitlabs.App.Repository.TeamMemberRepository;
+import com.bitlabs.App.Service.TeamMemberService;
 
 @Service
-public class TeamMemberServiceImpl {
+public class TeamMemberServiceImpl implements TeamMemberService {
 
 	 @Autowired
 	    private TeamMemberRepository teamMemberRepository; // Assuming you have a TeamMemberRepository
@@ -28,7 +29,7 @@ public class TeamMemberServiceImpl {
 	        teamMember.setRecruiter(recruiter); // Set the recruiter for the team member
 	        TeamMember savedTeamMember = teamMemberRepository.save(teamMember);
 
-	        // You can perform additional logic or return the saved team member
+	       
 	        return savedTeamMember;
 	    }
 }

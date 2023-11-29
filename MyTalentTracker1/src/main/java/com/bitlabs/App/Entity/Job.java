@@ -116,8 +116,6 @@ public class Job {
 
  
 
-
-
 	@Override
 	public String toString() {
 		return "Job [id=" + id + ", jobRecruiter=" + jobRecruiter + ", jobTitle=" + jobTitle + ", minimumExperience="

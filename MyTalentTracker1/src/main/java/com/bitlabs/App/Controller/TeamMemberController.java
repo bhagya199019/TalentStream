@@ -18,7 +18,7 @@ public class TeamMemberController {
 	@Autowired
     private TeamMemberService teamMemberService;
 
-    @PostMapping("/{recruiterId}/team-members")
+    @PostMapping("/addTeam-members/{recruiterId}")
     public ResponseEntity<TeamMember> addTeamMemberToRecruiter(@PathVariable Long recruiterId, @RequestBody TeamMember teamMember
     ) {
         TeamMember savedTeamMember = teamMemberService.addTeamMemberToRecruiter(recruiterId, teamMember);

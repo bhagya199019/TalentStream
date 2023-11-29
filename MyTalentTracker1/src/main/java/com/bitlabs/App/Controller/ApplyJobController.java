@@ -9,20 +9,27 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bitlabs.App.Entity.AppliedApplicantInfo;
 import com.bitlabs.App.Entity.Job;
+import com.bitlabs.App.Entity.ScheduleInterview;
 import com.bitlabs.App.Service.ApplyJobservice;
+import com.bitlabs.App.Service.ScheduleInterviewService;
 import com.bitlabs.App.dto.ApplicantJobInterviewDTO;
 import com.bitlabs.App.dto.AppliedApplicantInfoDTO;
+import com.bitlabs.App.dto.InterviewFeedbackUpdateDTO;
 
 @RestController
 public class ApplyJobController {
 
 	@Autowired
 	private ApplyJobservice applyJobService;
+	
+	@Autowired
+	private ScheduleInterviewService scheduleInterviewService;
 	
    @PostMapping("/applicant/applyjob/{applicantId}/{jobId}")
 	    public String saveJobForApplicant(
@@ -61,27 +68,41 @@ public class ApplyJobController {
        return ResponseEntity.ok(updateMessage);
    }
    
+    
    
- /*  @GetMapping("/recruiter/{recruiterId}/interview/{status}")
-   public List<ApplicantJobInterviewDTO> getApplicantJobInterviewInfo(
-           @PathVariable("recruiterId") long recruiterId,
-           @PathVariable("status") String status) {
-       return applyJobService.getApplicantJobInterviewInfoForRecruiterAndStatus(recruiterId, status);
+   @GetMapping("/applicant/checkstatus/{applyJobId}")
+   public List<AppliedApplicantInfo> getApplicantsInfoByApplyJobId(
+           @PathVariable("applyJobId") long applyJobId) {
+       return applyJobService.getApplicantInfoByApplyJobId(applyJobId);
+   }
+
+   @PostMapping("/recruiters/scheduleInterview/{applyJobId}")
+   public ResponseEntity<Void> createScheduleInterview(
+           @PathVariable Long applyJobId,
+           @RequestBody ScheduleInterview scheduleInterview) {
+  	 ScheduleInterview isCreated = scheduleInterviewService.createScheduleInterview(applyJobId,scheduleInterview);
+       if (isCreated!=null) {
+           return new ResponseEntity<>(HttpStatus.CREATED);
+       } else {
+           return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+       }
    }
    
    
-   @GetMapping("/applicant/{applicantId}/interviews/{status}")
-   public List<ApplicantJobInterviewDTO> getApplicantJobInterviewInfo(
-           @PathVariable("applicantId") long applicantId,
-           @PathVariable("status") String status) {
-       return applyJobService.getApplicantJobInterviewInfoForApplicantAndStatus(applicantId, status);
-   }*/
-   
-   
-   @GetMapping("/applicant/checkstatus")
-   public List<AppliedApplicantInfo> getApplicantsInfoByStatusAndApplicantId(
-           @RequestParam("applicantId") long applicantId,
-           @RequestParam("applicantStatus") String applicantStatus) {
-       return applyJobService.getApplicantsInfoByStatus(applicantId, applicantStatus);
+   @PostMapping("/recruiter/update-interview-feedback/{interviewId}")
+   public ResponseEntity<String> updateInterviewFeedback(@PathVariable Long interviewId,@RequestBody InterviewFeedbackUpdateDTO request) {
+
+       String updateFeedback = scheduleInterviewService.updateInterviewFeedback(interviewId, request.getFeedback());
+       return ResponseEntity.ok(updateFeedback);
    }
+   
+   
+
+   @GetMapping("/applicant/check-interview-feedback/{applicantId}")
+   public List<InterviewFeedbackUpdateDTO> getFeedbackByApplicantId(
+		   @PathVariable long applicantId) {
+       return scheduleInterviewService.getFeedbackByApplicantId(applicantId);
+   }
+
+   
 }

@@ -136,9 +136,14 @@ public List<ApplicantJobInterviewDTO> getApplicantJobInterviewInfoForApplicantAn
     return result;
 }*/
 
-public List<AppliedApplicantInfo> getApplicantsInfoByStatus(long applicantId,String applicantStatus) {
-    return applyJobRepository.findApplicantsInfoByStatus(applicantId, applicantStatus);
+public List<AppliedApplicantInfo>getApplicantInfoByStatus(long applicantId,String applicantStatus) {
+    return applyJobRepository.findApplicantInfoByStatus(applicantId, applicantStatus);
 }
+
+public List<AppliedApplicantInfo> getApplicantInfoByApplyJobId(long applyJobId) {
+    return applyJobRepository.findApplicantInfoByApplyJobId(applyJobId);
+}
+
 
 }
 

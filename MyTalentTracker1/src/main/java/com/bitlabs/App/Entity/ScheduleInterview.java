@@ -30,7 +30,7 @@ public class ScheduleInterview {
 	    private String interviewPerson;
 	    private String typeOfInterview;
 	    private int round;
-	    
+	   
 	    @Column(columnDefinition = "DATETIME")
 	    private LocalDateTime timeAndDate;
 	    private String modeOfInterview;
@@ -39,8 +39,11 @@ public class ScheduleInterview {
 	    
 	    @ManyToOne
 	    @JsonBackReference
-	    @JoinColumn(name = "apply_job_id")
+	    @JoinColumn(name = "applyjobid")
 	    private ApplyJob applyJob;
-
+        
+	 // Interview feedback fields
+	    private String interviewFeedback;  // Add a field to store feedback
+	    private String interviewStatus;    // Add a field to store the status of the interview
 		
 }
