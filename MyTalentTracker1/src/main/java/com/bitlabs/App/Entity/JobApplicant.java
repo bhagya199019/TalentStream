@@ -1,10 +1,14 @@
 package com.bitlabs.App.Entity;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -37,6 +41,10 @@ public class JobApplicant {
 	   @OneToMany(mappedBy="jobApplicant")
 	    @JsonIgnore
 	    private Set<SavedJob> savedJobs = new HashSet<>();
+	   
+	   @OneToMany(mappedBy = "jobApplicant", cascade = CascadeType.ALL)
+	    @JsonManagedReference
+	    private List<JobAlert> jobAlerts = new ArrayList<>();
 	
 	@Column(nullable = false)
     private String roles="ROLE_JOBAPPLICANT";

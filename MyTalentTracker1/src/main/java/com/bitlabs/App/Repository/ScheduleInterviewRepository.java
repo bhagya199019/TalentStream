@@ -16,7 +16,7 @@ public interface ScheduleInterviewRepository extends JpaRepository<ScheduleInter
 	
 	
 	@Query("SELECT NEW com.bitlabs.App.dto.InterviewFeedbackUpdateDTO(" +
-	        "i.id, i.interviewFeedback, i.interviewStatus) " +
+	        "i.id, i.interviewFeedback) " +
 	        "FROM ApplyJob aj " +
 	        "JOIN aj.scheduleInterviews i " +
 	        "WHERE aj.jobApplicant.id = :applicantId")

@@ -1,6 +1,7 @@
 package com.bitlabs.App.Entity;
 
 
+
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -40,6 +41,9 @@ public class ApplyJob {
     @OneToMany(mappedBy = "applyJob", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<ScheduleInterview>scheduleInterviews;
+    
+    @Column(nullable = false)
+    private String applicationDate;
 
 
 	 @Override

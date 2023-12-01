@@ -40,5 +40,9 @@ public class JobRecruiter {
 
     @Column(nullable = false)
     private String roles="ROLE_JOBRECRUITER";
+    
+    
+    @OneToMany(mappedBy = "jobRecruiter")
+    private List<JobAlert> jobAlerts;
 	
 }

@@ -26,7 +26,7 @@ public class SavedJobServiceImpl implements SavedJobService {
 	 JobApplicant jobApplicant=jobApplicantRepository.findById(applicantId).orElse(null);;
 	Job job=jobRepository.findById(jobId).orElse(null);;
 	 
-	 if(jobApplicant==null && job==null) {
+	 if(jobApplicant==null || job==null) {
 		 throw new Exception ("Applicant Id or Job Id not found");
 	 }
 	 

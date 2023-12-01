@@ -31,8 +31,7 @@ public class Job {
      @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne//(mappedBy = "companyProfile", cascade = CascadeType.ALL)
-   // @JoinColumn(name = "jobRecruiter_id")
+    @ManyToOne
     private JobRecruiter jobRecruiter;
     
     @OneToMany(mappedBy="job")
@@ -42,14 +41,8 @@ public class Job {
     @Column(nullable = false)
     private String jobTitle;
 
- 
-	
-
-	@Column(nullable = false)
-
-    private int minimumExperience;
-
-   
+ @Column(nullable = false)
+   private int minimumExperience;
 
    @Column(nullable = false)
     private int maximumExperience;
