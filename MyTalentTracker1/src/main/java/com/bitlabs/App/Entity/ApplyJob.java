@@ -45,10 +45,13 @@ public class ApplyJob {
     @Column(nullable = false)
     private String applicationDate;
 
+	@Override
+	public String toString() {
+		return "ApplyJob [applyjobid=" + applyjobid + ", jobApplicant=" + jobApplicant + ", job=" + job
+				+ ", applicantStatus=" + applicantStatus + ", scheduleInterviews=" + scheduleInterviews
+				+ ", applicationDate=" + applicationDate + "]";
+	}
 
-	 @Override
-		public String toString() {
-			return "ApplyJob [applyjobid=" + applyjobid + ", jobApplicant=" + jobApplicant + ", job=" + job
-					+ ", applicantStatus=" + applicantStatus + ", scheduleInterviews=" + scheduleInterviews + "]";
-		}
+
+	 
 }
