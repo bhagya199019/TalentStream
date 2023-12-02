@@ -21,9 +21,9 @@ public interface JobRepository extends JpaRepository<Job,Long>  {
 	List<Job> findBySkillsRequiredIgnoreCaseAndSkillNameIn(Set<String> skillNames);
 	
 	
+	
 	@Query("SELECT DISTINCT j FROM Job j JOIN j.skillsRequired s WHERE s.skillName = :skillName")
     Page<Job> findJobsBySkillName(String skillName, Pageable pageable);
-	
 	
 	@Query("SELECT j FROM Job j " +
 		       "WHERE (:jobTitle IS NULL OR LOWER(j.jobTitle) LIKE LOWER(CONCAT('%', :jobTitle, '%'))) " +

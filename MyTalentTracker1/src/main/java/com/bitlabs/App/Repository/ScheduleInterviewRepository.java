@@ -24,6 +24,17 @@ public interface ScheduleInterviewRepository extends JpaRepository<ScheduleInter
 
    
 
+	@Query("SELECT NEW com.bitlabs.App.dto.ApplicantJobInterviewDTO(" +
+	        "a.name, a.email, a.mobilenumber, j.jobTitle, si.timeAndDate, si.location, si.modeOfInterview, si.round, si.interviewLink, si.interviewPerson) " +
+	        "FROM ScheduleInterview si " +
+	        "INNER JOIN si.applyJob aj " +
+	        "INNER JOIN aj.jobApplicant a " +
+	        "INNER JOIN aj.job j " +
+	        "INNER JOIN j.jobRecruiter r " +
+	        "WHERE r.recruiterId = :recruiterId " +
+	        "AND aj.applicantStatus = :applicantStatus")
+	List<ApplicantJobInterviewDTO>getApplicantJobInterviewInfoByRecruiterAndStatus(@Param("recruiterId") long recruiterId,
+	        @Param("applicantStatus") String applicantStatus);
 	
 	/*
 	// Define custom query methods if needed

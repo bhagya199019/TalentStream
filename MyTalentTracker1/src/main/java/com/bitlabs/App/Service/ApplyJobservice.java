@@ -28,4 +28,7 @@ public interface ApplyJobservice {
 	public List<AppliedApplicantInfo> getApplicantInfoByStatus(long applicantId,String applicantStatus);
 	
 	public List<AppliedApplicantInfo> getApplicantInfoByApplyJobId(long applyJobId);
+	
+	public List<ApplicantJobInterviewDTO> getApplicantJobInterviewInfoForRecruiterAndStatus(
+	        long recruiterId, String applicantStatus);
 }

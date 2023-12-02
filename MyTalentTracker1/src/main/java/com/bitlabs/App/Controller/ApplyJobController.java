@@ -104,5 +104,12 @@ public class ApplyJobController {
        return scheduleInterviewService.getFeedbackByApplicantId(applicantId);
    }
 
+
+	 @GetMapping("/recruiter/{recruiterId}/interviews/{status}")
+ public List<ApplicantJobInterviewDTO> getApplicantJobInterviewInfo(
+         @PathVariable("recruiterId") long recruiterId,
+         @PathVariable("status") String status) {
+     return applyJobService.getApplicantJobInterviewInfoForRecruiterAndStatus(recruiterId, status);
+ }
    
 }

@@ -18,7 +18,7 @@ public class SearchForaJobController {
 	
 	@Autowired
     private SearchForaJobService jobSearchService;
-
+ 
     @GetMapping("/applicant/searchjobbyskillname/{applicantId}/jobs/{skillName}")
     public ResponseEntity<Page<Job>> searchJobsBySkillAndApplicant(
     		@PathVariable int applicantId,
@@ -28,7 +28,7 @@ public class SearchForaJobController {
     ) {
         Pageable pageable = PageRequest.of(page, size);
         Page<Job> jobs = jobSearchService.searchJobsBySkillAndApplicant(applicantId, skillName, pageable);
-
+ 
         if (jobs.isEmpty()) {
             return ResponseEntity.noContent().build();
         }

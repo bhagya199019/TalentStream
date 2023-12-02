@@ -144,6 +144,11 @@ public List<AppliedApplicantInfo> getApplicantInfoByApplyJobId(long applyJobId) 
     return applyJobRepository.findApplicantInfoByApplyJobId(applyJobId);
 }
 
+public List<ApplicantJobInterviewDTO> getApplicantJobInterviewInfoForRecruiterAndStatus(
+        long recruiterId, String applicantStatus) {
+    return scheduleInterviewRepository.getApplicantJobInterviewInfoByRecruiterAndStatus(recruiterId, applicantStatus);
+}
+ 
 
 }
 
