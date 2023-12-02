@@ -70,6 +70,20 @@ public class JobController {
 	}
 
  	    
+	 @GetMapping("/recruiters/viewJobs/{jobRecruiterId}")
+	    public ResponseEntity<List<Job>> getJobsByRecruiter(@PathVariable Long jobRecruiterId) {
+	        // You can add validation here to ensure the jobRecruiterId is valid.
+
+	        List<Job> jobs = jobService.getJobsByRecruiter(jobRecruiterId);
+	        if (jobs.isEmpty()) {
+	            // If no jobs are found for the specified recruiter, you can return a not found response.
+	            return ResponseEntity.notFound().build();
+	        } else {
+	            return ResponseEntity.ok(jobs);
+	        }
+	    }
+
+	
  	}
 
   

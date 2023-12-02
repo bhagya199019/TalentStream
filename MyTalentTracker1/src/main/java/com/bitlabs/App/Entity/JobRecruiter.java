@@ -2,6 +2,8 @@ package com.bitlabs.App.Entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -34,7 +36,8 @@ public class JobRecruiter {
     @Column(nullable = false)
     private String password;
     
-    @OneToMany( cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Job> jobs;
     
 

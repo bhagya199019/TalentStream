@@ -21,4 +21,6 @@ public interface JobService {
 		        String minimumQualification,
 		        String specialization
 		    );
+	 
+	 public List<Job> getJobsByRecruiter(Long jobRecruiterId);
 }

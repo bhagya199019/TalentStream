@@ -48,4 +48,9 @@ public interface JobRepository extends JpaRepository<Job,Long>  {
 		    @Param("minimumQualification") String minimumQualification,
 		    @Param("specialization") String specialization);
 	
+	
+	
+	@Query("SELECT j FROM Job j WHERE j.jobRecruiter.id = :jobRecruiterId")
+    List<Job> findByJobRecruiterId(@Param("jobRecruiterId") Long jobRecruiterId);
+	
 }

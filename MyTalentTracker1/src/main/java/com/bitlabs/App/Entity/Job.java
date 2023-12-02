@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnoreType;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -27,10 +29,13 @@ import jakarta.persistence.JoinColumn;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties({"jobRecruiter"})
+@JsonIgnoreType
 public class Job {
      @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+     
     @ManyToOne
     private JobRecruiter jobRecruiter;
     
