@@ -6,17 +6,18 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bitlabs.App.Entity.JobRecruiter;
 import com.bitlabs.App.Entity.Login;
-import com.bitlabs.App.Entity.NewPasswordRequest;
 import com.bitlabs.App.Repository.JobRecruiterRepository;
 import com.bitlabs.App.Service.EmailService;
 import com.bitlabs.App.Service.OtpService;
 import com.bitlabs.App.Service.RecruiterService;
+import com.bitlabs.App.dto.NewPasswordRequestDTO;
 import com.bitlabs.App.dto.OtpVerificationDTO;
 import com.bitlabs.App.dto.SendOtpDTO;
 
@@ -100,11 +101,11 @@ public class RecruiterController {
 
 	}
 	   
-	  @PostMapping("/recruiter/reset-password")
- public ResponseEntity<String> resetPassword(@RequestBody NewPasswordRequest request) {
+	  @PostMapping("/recruiter/reset-password/{email}")
+ public ResponseEntity<String> resetPassword(@RequestBody NewPasswordRequestDTO request, @PathVariable String email) {
 	         String newPassword = request.getNewPassword();
 	         String confirmPassword = request.getConfirmPassword();
-	         String email = request.getEmail();
+	         
 
 	         if (email == null) {
 	             return ResponseEntity.badRequest().body("Email not found");

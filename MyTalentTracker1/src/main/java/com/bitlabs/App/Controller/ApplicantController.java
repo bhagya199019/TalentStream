@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bitlabs.App.Entity.JobApplicant;
 import com.bitlabs.App.Entity.Login;
-import com.bitlabs.App.Entity.NewPasswordRequest;
 import com.bitlabs.App.Repository.JobApplicantRepository;
 import com.bitlabs.App.Service.EmailService;
 import com.bitlabs.App.Service.OtpService;
+import com.bitlabs.App.dto.NewPasswordRequestDTO;
 import com.bitlabs.App.dto.OtpVerificationDTO;
 import com.bitlabs.App.dto.SendOtpDTO;
 
@@ -113,7 +113,7 @@ public class ApplicantController {
 }
    
      @PostMapping("/applicant/reset-password/{email}")
-	    public ResponseEntity<String> setNewPassword(@RequestBody NewPasswordRequest request, @PathVariable String email) {
+	    public ResponseEntity<String> setNewPassword(@RequestBody NewPasswordRequestDTO request, @PathVariable String email) {
 	        String newPassword = request.getNewPassword();
 	        String confirmedPassword = request.getConfirmPassword();
 	        

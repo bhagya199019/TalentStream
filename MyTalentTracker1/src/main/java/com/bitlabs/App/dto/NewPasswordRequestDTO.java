@@ -1,11 +1,11 @@
-package com.bitlabs.App.Entity;
+package com.bitlabs.App.dto;
 
 import lombok.Data;
 
 @Data
-public class NewPasswordRequest {
+public class NewPasswordRequestDTO {
 
 	private String newPassword;
 	private String confirmPassword;
-	private String email;
+	
 }
