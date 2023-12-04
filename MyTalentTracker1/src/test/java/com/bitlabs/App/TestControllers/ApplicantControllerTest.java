@@ -83,8 +83,7 @@ public class ApplicantControllerTest {
     @InjectMocks
     private ApplicantController  applicantController;
  
-    @Autowired
-    private ObjectMapper objectMapper;
+    
     
     private Map<String, OtpData> otpMap;
     
