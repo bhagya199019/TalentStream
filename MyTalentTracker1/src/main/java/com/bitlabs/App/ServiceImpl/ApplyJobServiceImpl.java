@@ -14,6 +14,7 @@ import com.bitlabs.App.Entity.ApplyJob;
 import com.bitlabs.App.Entity.ApplyJobStatusHistory;
 import com.bitlabs.App.Entity.Job;
 import com.bitlabs.App.Entity.JobApplicant;
+import com.bitlabs.App.Entity.JobRecruiter;
 import com.bitlabs.App.Entity.RecruiterProfile;
 import com.bitlabs.App.Entity.ScheduleInterview;
 import com.bitlabs.App.Repository.ApplyJobRepository;
@@ -58,7 +59,7 @@ public String applicantApplyForJob(long applicantId, long jobId) {
 		
 		System.out.println("jobApplicant is"+jobApplicant);
 		Job job=jobRepository.findById(jobId).orElse(null);
-		System.out.println("job is"+job);
+	//	System.out.println("job is"+job);
 		
 		if(jobApplicant==null && job==null) {
 			return "Applicant Id or job Id not null";
@@ -146,7 +147,7 @@ public String applicantApplyForJob(long applicantId, long jobId) {
 	
 	private void sendStatusUpdateAlert(ApplyJob applyJob, String oldStatus, String newStatus) {
         // Retrieve the recruiter profile associated with the job
-        RecruiterProfile recruiter = applyJob.getJob().getJobRecruiter().getRecruiterProfile();
+        JobRecruiter recruiter = applyJob.getJob().getJobRecruiter();
 
         // Create the alert message
         String alertMessage = "Applicant status updated from " + oldStatus + " to " + newStatus;

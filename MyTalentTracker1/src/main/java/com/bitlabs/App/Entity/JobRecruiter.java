@@ -29,7 +29,7 @@ public class JobRecruiter {
     private Long recruiterId;
 
     @Column(nullable = false)
-    private String companyname;
+    private String companyName;
 
     @Column(nullable = false, unique = true)
     private String mobilenumber;

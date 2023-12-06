@@ -25,7 +25,7 @@ public class Alert {
 
     @ManyToOne
     @JoinColumn(name = "recruiter_id")
-    private RecruiterProfile recruiter;
+    private JobRecruiter recruiter;
 
     private String companyName;
 

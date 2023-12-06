@@ -10,7 +10,7 @@ import com.bitlabs.App.Entity.Alert;
 import com.bitlabs.App.Entity.ApplyJob;
 import com.bitlabs.App.Entity.Job;
 import com.bitlabs.App.Entity.JobApplicant;
-
+import com.bitlabs.App.Entity.JobRecruiter;
 import com.bitlabs.App.Entity.RecruiterProfile;
 
 import com.bitlabs.App.Repository.AlertRepository;
@@ -25,7 +25,7 @@ public class AlertServiceImpl implements AlertService {
 	    @Autowired
 	    private JavaMailSender javaMailSender; // Autowire JavaMailSender bean
 
-	    public void sendAlert(RecruiterProfile recruiter, ApplyJob applyJob, String alertMessage) {
+	    public void sendAlert(JobRecruiter recruiter, ApplyJob applyJob, String alertMessage) {
 	        // Assuming each ApplyJob is associated with one JobApplicant
 	        JobApplicant applicant = applyJob.getJobApplicant();
 
