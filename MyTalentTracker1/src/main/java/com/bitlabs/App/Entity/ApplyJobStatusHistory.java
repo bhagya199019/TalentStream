@@ -2,6 +2,9 @@ package com.bitlabs.App.Entity;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,10 +14,13 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class ApplyJobStatusHistory {
@@ -25,12 +31,13 @@ public class ApplyJobStatusHistory {
     
     @ManyToOne
     @JoinColumn(name = "apply_job_id", nullable = false)
+    @JsonBackReference
     private ApplyJob applyJob;
     
     @Column(name = "applicant_status", nullable = false)
     private String applicantStatus;
     
-    @Column(name = "change_date", nullable = false)
+    @Column(name = "change_date", nullable = false, columnDefinition = "TIMESTAMP")
     private LocalDateTime changeDate;
 
     // Constructors, getters, setters, etc.

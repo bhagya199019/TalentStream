@@ -1,12 +1,16 @@
 package com.bitlabs.App.Entity;
 
 
+import java.time.LocalDateTime;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -15,10 +19,13 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class ApplyJob {
@@ -39,24 +46,19 @@ public class ApplyJob {
     
     @OneToMany(mappedBy = "applyJob", cascade = CascadeType.ALL)
     @JsonManagedReference
-    private List<ScheduleInterview>scheduleInterviews;
+    @JsonIgnore
+private List<ScheduleInterview>scheduleInterviews;
     
-    @Column(nullable = false)
-    private String applicationDate;
+    @Column(columnDefinition = "DATETIME",nullable=false)
+    private LocalDateTime applicationDate;
     
-    
+ 
     @OneToMany(mappedBy = "applyJob", cascade = CascadeType.ALL)
     @JsonManagedReference
-    private List<ApplyJobStatusHistory> statusHistory;
+    @JsonIgnore
+private List<ApplyJobStatusHistory> statusHistory;
+    	
 
-	@Override
-	public String toString() {
-		return "ApplyJob [applyjobid=" + applyjobid + ", jobApplicant=" + jobApplicant + ", job=" + job
-				+ ", applicantStatus=" + applicantStatus + ", scheduleInterviews=" + scheduleInterviews
-				+ ", applicationDate=" + applicationDate + "]";
-	}
 	
-
-
 	 
 }

@@ -1,5 +1,8 @@
 package com.bitlabs.App.Entity;
 
+import java.time.LocalDateTime;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,25 +17,20 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class JobAlert {
-    @Id
+public class Alert {
+
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String message;
-
-    @ManyToOne
-    @JoinColumn(name = "job_applicant_id")
-    private JobApplicant jobApplicant;
-
-    private boolean isRead; // Indicates whether the alert has been read by the applicant
-
-    @ManyToOne
-    @JoinColumn(name = "schedule_interview_id")
-    private ScheduleInterview scheduleInterview;
-    
     @ManyToOne
     @JoinColumn(name = "recruiter_id")
-    private JobRecruiter jobRecruiter;
-    
+    private RecruiterProfile recruiter;
+
+    private String companyName;
+
+    private String alertMessage;
+
+    @Column(columnDefinition = "DATETIME")
+    private LocalDateTime alertDate;
 }

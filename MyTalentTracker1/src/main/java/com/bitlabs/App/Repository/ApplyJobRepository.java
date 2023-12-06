@@ -60,8 +60,15 @@ public interface ApplyJobRepository extends JpaRepository<ApplyJob,Long>{
 	            "INNER JOIN j.skillsRequired s " +
 	            "WHERE aj.id = :applyJobId")
 	    List<AppliedApplicantInfo> findApplicantInfoByApplyJobId(@Param("applyJobId") long applyJobId);
+	    
+	    
+	    
 
+	    @Query("SELECT a FROM ApplyJob a WHERE a.job.id = :jobId AND a.applicantStatus = :applicantStatus")
+	    List<ApplyJob> findByJobIdAndApplicantStatus(@Param("jobId") Long jobId, @Param("applicantStatus") String applicantStatus);
 	}
+
+	
 
 	
 

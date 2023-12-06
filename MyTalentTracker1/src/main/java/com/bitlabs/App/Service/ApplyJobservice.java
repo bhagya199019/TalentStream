@@ -6,8 +6,10 @@ import com.bitlabs.App.Entity.AppliedApplicantInfo;
 import com.bitlabs.App.Entity.ApplyJob;
 import com.bitlabs.App.Entity.ApplyJobStatusHistory;
 import com.bitlabs.App.Entity.Job;
+import com.bitlabs.App.dto.ApplicantDetailsDTO;
 import com.bitlabs.App.dto.ApplicantJobInterviewDTO;
 import com.bitlabs.App.dto.AppliedApplicantInfoDTO;
+import com.bitlabs.App.dto.ApplyJobStatusHistoryDTO;
 
 public interface ApplyJobservice {
 	
@@ -21,6 +23,8 @@ public interface ApplyJobservice {
 	
 	
 	public List<ApplyJobStatusHistory> getApplicantStatusHistory(Long applyJobId);
+	
+	public List<ApplyJobStatusHistoryDTO> getApplicantStatus(Long applyJobId);
 	
 	
 /*	public List<ApplicantJobInterviewDTO> getApplicantJobInterviewInfoForRecruiterAndStatus(
@@ -37,4 +41,6 @@ public interface ApplyJobservice {
 	
 	public List<ApplicantJobInterviewDTO> getApplicantJobInterviewInfoForRecruiterAndStatus(
 	        long recruiterId, String applicantStatus);
+	
+	public List<ApplicantDetailsDTO> getJobApplicantsDetailsByStatus(Long jobId, String applicantStatus);
 }

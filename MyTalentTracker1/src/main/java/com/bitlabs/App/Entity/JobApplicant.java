@@ -42,9 +42,7 @@ public class JobApplicant {
 	    @JsonIgnore
 	    private Set<SavedJob> savedJobs = new HashSet<>();
 	   
-	   @OneToMany(mappedBy = "jobApplicant", cascade = CascadeType.ALL)
-	    @JsonManagedReference
-	    private List<JobAlert> jobAlerts = new ArrayList<>();
+	   
 	
 	@Column(nullable = false)
     private String roles="ROLE_JOBAPPLICANT";

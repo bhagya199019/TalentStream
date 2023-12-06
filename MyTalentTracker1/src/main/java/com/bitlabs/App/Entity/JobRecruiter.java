@@ -11,11 +11,15 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -36,7 +40,7 @@ public class JobRecruiter {
     @Column(nullable = false)
     private String password;
     
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "jobRecruiter", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Job> jobs;
     
@@ -45,7 +49,7 @@ public class JobRecruiter {
     private String roles="ROLE_JOBRECRUITER";
     
     
-    @OneToMany(mappedBy = "jobRecruiter")
-    private List<JobAlert> jobAlerts;
+    @OneToOne(mappedBy = "jobRecruiter", cascade = CascadeType.ALL)
+    private RecruiterProfile recruiterProfile;
 	
 }

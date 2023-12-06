@@ -19,8 +19,10 @@ import com.bitlabs.App.Entity.Job;
 import com.bitlabs.App.Entity.ScheduleInterview;
 import com.bitlabs.App.Service.ApplyJobservice;
 import com.bitlabs.App.Service.ScheduleInterviewService;
+import com.bitlabs.App.dto.ApplicantDetailsDTO;
 import com.bitlabs.App.dto.ApplicantJobInterviewDTO;
 import com.bitlabs.App.dto.AppliedApplicantInfoDTO;
+import com.bitlabs.App.dto.ApplyJobStatusHistoryDTO;
 import com.bitlabs.App.dto.InterviewFeedbackUpdateDTO;
 
 @RestController
@@ -70,11 +72,11 @@ public class ApplyJobController {
    }
    
     
-   
+     
    @GetMapping("/applicant/checkstatus/{applyJobId}")
-   public List<AppliedApplicantInfo> getApplicantsInfoByApplyJobId(
-           @PathVariable("applyJobId") long applyJobId) {
-       return applyJobService.getApplicantInfoByApplyJobId(applyJobId);
+   public ResponseEntity<List<ApplyJobStatusHistoryDTO>> getApplicantStatus(@PathVariable Long applyJobId) {
+       List<ApplyJobStatusHistoryDTO> historyDTOList = applyJobService.getApplicantStatus(applyJobId);
+       return ResponseEntity.ok(historyDTOList);
    }
 
    @PostMapping("/recruiters/scheduleInterview/{applyJobId}")
@@ -106,18 +108,30 @@ public class ApplyJobController {
    }
 
 
-	 @GetMapping("/recruiter/{recruiterId}/interviews/{status}")
+/*	 @GetMapping("/recruiter/{recruiterId}/interviews/{status}")
  public List<ApplicantJobInterviewDTO> getApplicantJobInterviewInfo(
          @PathVariable("recruiterId") long recruiterId,
          @PathVariable("status") String status) {
      return applyJobService.getApplicantJobInterviewInfoForRecruiterAndStatus(recruiterId, status);
- }
+ }*/
    
 	 
-	 @GetMapping("/applyjob-status-history/{applyJobId}")
+	 @GetMapping("/applicant/applyjob-status-history/{applyJobId}")
 	    public ResponseEntity<List<ApplyJobStatusHistory>> getApplicantStatusHistory(@PathVariable Long applyJobId) {
 	        List<ApplyJobStatusHistory> historyList = applyJobService.getApplicantStatusHistory(applyJobId);
 	        return ResponseEntity.ok(historyList);
 	    }
+	 
+	 
+	 
+	 @GetMapping("recruiter/applicant-details/{jobId}/{applicantStatus}")
+	    public ResponseEntity<List<ApplicantDetailsDTO>> getApplicantDetails(
+	            @PathVariable Long jobId,
+	            @PathVariable String applicantStatus) {
+	        List<ApplicantDetailsDTO> applicantDetails = applyJobService.getJobApplicantsDetailsByStatus(jobId, applicantStatus);
+	        return ResponseEntity.ok(applicantDetails);
+	    }
+	 
+	 
 	 
 }

@@ -51,10 +51,7 @@ public class ScheduleInterview {
 	    private String interviewFeedback;  // Add a field to store feedback
 	  //  private String interviewStatus;    // Add a field to store the status of the interview
 	    
-	    @OneToMany(mappedBy = "scheduleInterview", cascade = CascadeType.ALL)
-	    @JsonManagedReference
-	    private List<JobAlert> jobAlerts = new ArrayList<>();
-	    
+	   
 	   
 
 		
