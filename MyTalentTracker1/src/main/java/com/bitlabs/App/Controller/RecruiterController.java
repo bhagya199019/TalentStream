@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -74,10 +75,9 @@ public class RecruiterController {
 	}
 	
 	@PostMapping("/recruiter/register-jobRecruiter")
-    public ResponseEntity<String> registerjobRecruiter(@RequestBody JobRecruiter jobRecruiter) {
-       return recruiterService.saveRecruiter(jobRecruiter);
-    }
-	
+	public ResponseEntity<String> registerjobRecruiter(@RequestBody JobRecruiter jobRecruiter) {
+	   return  recruiterService.saveRecruiter(jobRecruiter);   
+	}
 	
 	@PostMapping("/recruiter/forgotPassword/send-Otp")
 	  public ResponseEntity<String> ForgotPasswordSendOtp(@RequestBody SendOtpDTO  request){
