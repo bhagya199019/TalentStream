@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bitlabs.App.Entity.AppliedApplicantInfo;
+import com.bitlabs.App.Entity.ApplyJobStatusHistory;
 import com.bitlabs.App.Entity.Job;
 import com.bitlabs.App.Entity.ScheduleInterview;
 import com.bitlabs.App.Service.ApplyJobservice;
@@ -112,4 +113,11 @@ public class ApplyJobController {
      return applyJobService.getApplicantJobInterviewInfoForRecruiterAndStatus(recruiterId, status);
  }
    
+	 
+	 @GetMapping("/applyjob-status-history/{applyJobId}")
+	    public ResponseEntity<List<ApplyJobStatusHistory>> getApplicantStatusHistory(@PathVariable Long applyJobId) {
+	        List<ApplyJobStatusHistory> historyList = applyJobService.getApplicantStatusHistory(applyJobId);
+	        return ResponseEntity.ok(historyList);
+	    }
+	 
 }

@@ -9,15 +9,19 @@ import org.springframework.stereotype.Service;
 
 import com.bitlabs.App.Entity.AppliedApplicantInfo;
 import com.bitlabs.App.Entity.ApplyJob;
+import com.bitlabs.App.Entity.ApplyJobStatusHistory;
 import com.bitlabs.App.Entity.Job;
 import com.bitlabs.App.Entity.JobApplicant;
 import com.bitlabs.App.Repository.ApplyJobRepository;
+import com.bitlabs.App.Repository.ApplyJobStatusHistoryRepository;
 import com.bitlabs.App.Repository.JobApplicantRepository;
 import com.bitlabs.App.Repository.JobRepository;
 import com.bitlabs.App.Repository.ScheduleInterviewRepository;
 import com.bitlabs.App.Service.ApplyJobservice;
 import com.bitlabs.App.dto.ApplicantJobInterviewDTO;
 import com.bitlabs.App.dto.AppliedApplicantInfoDTO;
+
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class ApplyJobServiceImpl implements ApplyJobservice {
@@ -33,6 +37,10 @@ public class ApplyJobServiceImpl implements ApplyJobservice {
 	
 	@Autowired
 	private ScheduleInterviewRepository scheduleInterviewRepository;
+	
+	
+	 @Autowired
+	private ApplyJobStatusHistoryRepository applyJobStatusHistoryRepository;
 	
 public String applicantApplyForJob(long applicantId, long jobId) {
 		JobApplicant jobApplicant=jobApplicantRepository.findById(applicantId);
@@ -109,33 +117,42 @@ public String applicantApplyForJob(long applicantId, long jobId) {
 		  }
 
 	
-public String updateApplicantStatus(Long applyJobId, String newStatus) {
-	    ApplyJob applyJob=applyJobRepository.findById(applyJobId)
-	            .orElseThrow();
-	 
-	    applyJob.setApplicantStatus(newStatus);
-	    applyJobRepository.save(applyJob);
-	 
-	    return "Applicant status updated to: " + newStatus;
-	}
+	public String updateApplicantStatus(Long applyJobId, String newStatus) {
+        ApplyJob applyJob = applyJobRepository.findById(applyJobId)
+                .orElseThrow();
+
+        String oldStatus = applyJob.getApplicantStatus();
+        applyJob.setApplicantStatus(newStatus);
+        applyJobRepository.save(applyJob);
+
+        saveStatusHistory(applyJob, oldStatus, newStatus);
+
+        return "Applicant status updated to: " + newStatus;
+    }
 
 
-/* public List<ApplicantJobInterviewDTO> getApplicantJobInterviewInfoForRecruiterAndStatus(
-        long recruiterId, String applicantStatus) {
-    return scheduleInterviewRepository.getApplicantJobInterviewInfoByRecruiterAndStatus(recruiterId, applicantStatus);
-}
- 
+	private void saveStatusHistory(ApplyJob applyJob, String oldStatus, String newStatus) {
+        if (applyJob.getStatusHistory() == null) {
+            applyJob.setStatusHistory(new ArrayList<>());
+        }
 
-public List<ApplicantJobInterviewDTO> getApplicantJobInterviewInfoForApplicantAndStatus(long applicantId, String applicantStatus) {
-    System.out.println("ApplicantId: " + applicantId);
-    System.out.println("ApplicantStatus: " + applicantStatus);
+        ApplyJobStatusHistory statusChange = new ApplyJobStatusHistory();
+        statusChange.setApplyJob(applyJob);
+        statusChange.setApplicantStatus(newStatus);
+        statusChange.setChangeDate(LocalDateTime.now());
 
-    List<ApplicantJobInterviewDTO> result = scheduleInterviewRepository.getApplicantJobInterviewInfoByApplicantAndStatus(applicantId, applicantStatus);
-    System.out.println("Query Result: " + result);
+        applyJob.getStatusHistory().add(statusChange);
+        applyJobStatusHistoryRepository.save(statusChange);
+    }
+	
+	
+	 public List<ApplyJobStatusHistory> getApplicantStatusHistory(Long applyJobId) {
+	        ApplyJob applyJob = applyJobRepository.findById(applyJobId)
+	                .orElseThrow(() -> new EntityNotFoundException("ApplyJob with id " + applyJobId + " not found."));
 
-    return result;
-}*/
-
+	        return applyJob.getStatusHistory();
+	    }
+	
 public List<AppliedApplicantInfo>getApplicantInfoByStatus(long applicantId,String applicantStatus) {
     return applyJobRepository.findApplicantInfoByStatus(applicantId, applicantStatus);
 }

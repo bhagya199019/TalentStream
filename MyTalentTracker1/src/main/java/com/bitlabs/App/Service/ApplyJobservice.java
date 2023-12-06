@@ -3,6 +3,8 @@ package com.bitlabs.App.Service;
 import java.util.List;
 
 import com.bitlabs.App.Entity.AppliedApplicantInfo;
+import com.bitlabs.App.Entity.ApplyJob;
+import com.bitlabs.App.Entity.ApplyJobStatusHistory;
 import com.bitlabs.App.Entity.Job;
 import com.bitlabs.App.dto.ApplicantJobInterviewDTO;
 import com.bitlabs.App.dto.AppliedApplicantInfoDTO;
@@ -16,6 +18,10 @@ public interface ApplyJobservice {
 	public List<Job> getAppliedJobsForApplicant(long applicantId);
 	
 	public String updateApplicantStatus(Long applyJobId, String newStatus);
+	
+	
+	public List<ApplyJobStatusHistory> getApplicantStatusHistory(Long applyJobId);
+	
 	
 /*	public List<ApplicantJobInterviewDTO> getApplicantJobInterviewInfoForRecruiterAndStatus(
 	        long recruiterId, String applicantStatus);

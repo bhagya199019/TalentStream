@@ -54,5 +54,8 @@ public class ScheduleInterview {
 	    @OneToMany(mappedBy = "scheduleInterview", cascade = CascadeType.ALL)
 	    @JsonManagedReference
 	    private List<JobAlert> jobAlerts = new ArrayList<>();
+	    
+	   
+
 		
 }
