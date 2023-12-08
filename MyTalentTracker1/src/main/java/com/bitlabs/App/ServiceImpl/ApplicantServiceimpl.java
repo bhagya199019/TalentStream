@@ -50,9 +50,7 @@ public class ApplicantServiceimpl implements ApplicantService{
 	
 	public List<JobApplicant> getAllApplicants(){
 			
-			return jobApplicantRepository.findAll();
-			
-			
+			return jobApplicantRepository.findAll();	
 		}
 	
 		public JobApplicant viewApplicantById(Long applicantId) {

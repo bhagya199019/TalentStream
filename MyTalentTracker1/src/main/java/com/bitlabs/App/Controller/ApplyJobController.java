@@ -129,10 +129,6 @@ public class ApplyJobController {
 	        return ResponseEntity.ok(applicantDetails);
 	    }
 	 
-	 @GetMapping("applicant/{applicantId}/getjob-alerts")
-	    public ResponseEntity<List<Alert>> getJobAlertsByApplicantId(@PathVariable Long applicantId) {
-	        List<Alert> alerts = alertService.getAlertsByApplicantId(applicantId);
-	        return ResponseEntity.ok(alerts);
-	    }
+	 
 	 
 }
