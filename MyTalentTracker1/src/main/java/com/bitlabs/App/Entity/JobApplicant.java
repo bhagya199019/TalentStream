@@ -17,11 +17,14 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class JobApplicant {
@@ -34,7 +37,7 @@ public class JobApplicant {
 	private String mobilenumber;
 	private String password;
 	
-	   @OneToMany(mappedBy="jobApplicant")
+	   @OneToMany(mappedBy="jobApplicant",cascade = CascadeType.ALL)
 	    @JsonIgnore
 	    private Set<ApplyJob> appliedJobs = new HashSet<>();
 	    
@@ -47,12 +50,10 @@ public class JobApplicant {
 	@Column(nullable = false)
     private String roles="ROLE_JOBAPPLICANT";
 
-	@Override
-	public String toString() {
-		return "JobApplicant [id=" + id + ", name=" + name + ", email=" + email + ", mobilenumber=" + mobilenumber
-				+ ", password=" + password + ", roles=" + roles + "]";
-	} 
 	
 	
+	@JsonIgnore
+	@OneToMany(mappedBy = "jobApplicant",cascade = CascadeType.ALL)
+	private List<Alert> alerts = new ArrayList<>();
 	
 }

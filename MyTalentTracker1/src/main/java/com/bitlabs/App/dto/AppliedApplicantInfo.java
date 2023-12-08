@@ -1,4 +1,4 @@
-package com.bitlabs.App.Entity;
+package com.bitlabs.App.dto;
 
 import java.util.Date;
 

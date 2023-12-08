@@ -2,6 +2,7 @@ package com.bitlabs.App.Entity;
 
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -47,10 +48,12 @@ public class ApplyJob {
     @OneToMany(mappedBy = "applyJob", cascade = CascadeType.ALL)
     @JsonManagedReference
     @JsonIgnore
-private List<ScheduleInterview>scheduleInterviews;
+    private List<ScheduleInterview>scheduleInterviews;
     
-    @Column(columnDefinition = "DATETIME",nullable=false)
+    @Column(columnDefinition = "TIMESTAMP",nullable=false)
     private LocalDateTime applicationDate;
+    
+    
     
  
     @OneToMany(mappedBy = "applyJob", cascade = CascadeType.ALL)

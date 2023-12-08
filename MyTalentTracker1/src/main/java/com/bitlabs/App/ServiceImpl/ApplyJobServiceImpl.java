@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.bitlabs.App.Entity.AppliedApplicantInfo;
+import com.bitlabs.App.Entity.Alert;
 import com.bitlabs.App.Entity.ApplyJob;
 import com.bitlabs.App.Entity.ApplyJobStatusHistory;
 import com.bitlabs.App.Entity.Job;
@@ -17,6 +17,7 @@ import com.bitlabs.App.Entity.JobApplicant;
 import com.bitlabs.App.Entity.JobRecruiter;
 import com.bitlabs.App.Entity.RecruiterProfile;
 import com.bitlabs.App.Entity.ScheduleInterview;
+import com.bitlabs.App.Repository.AlertRepository;
 import com.bitlabs.App.Repository.ApplyJobRepository;
 import com.bitlabs.App.Repository.ApplyJobStatusHistoryRepository;
 import com.bitlabs.App.Repository.JobApplicantRepository;
@@ -26,6 +27,7 @@ import com.bitlabs.App.Service.AlertService;
 import com.bitlabs.App.Service.ApplyJobservice;
 import com.bitlabs.App.dto.ApplicantDetailsDTO;
 import com.bitlabs.App.dto.ApplicantJobInterviewDTO;
+import com.bitlabs.App.dto.AppliedApplicantInfo;
 import com.bitlabs.App.dto.AppliedApplicantInfoDTO;
 import com.bitlabs.App.dto.ApplyJobStatusHistoryDTO;
 import com.bitlabs.App.dto.ScheduleInterviewDTO;
@@ -50,6 +52,9 @@ public class ApplyJobServiceImpl implements ApplyJobservice {
 	@Autowired 
 	private AlertService alertService;
 	
+	@Autowired
+	private AlertRepository alertRepository;
+	
 	
 	 @Autowired
 	private ApplyJobStatusHistoryRepository applyJobStatusHistoryRepository;
@@ -70,6 +75,8 @@ public String applicantApplyForJob(long applicantId, long jobId) {
 				ApplyJob applyJob = new  ApplyJob();
 		           applyJob.setJobApplicant(jobApplicant);
 		           applyJob.setJob(job);
+		        // Set the application date to the current date and time
+		           applyJob.setApplicationDate(LocalDateTime.now());
 		           applyJobRepository.save(applyJob);
 		           return "Job Applied Successfully";
 			}
@@ -260,10 +267,12 @@ private List<ScheduleInterviewDTO> convertToScheduleInterviewDTOs(List<ScheduleI
             .collect(Collectors.toList());
 }
 
-
-
-
+   
 
 }
+
+
+
+
 
 

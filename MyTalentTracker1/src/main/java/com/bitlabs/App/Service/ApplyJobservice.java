@@ -2,12 +2,12 @@ package com.bitlabs.App.Service;
 
 import java.util.List;
 
-import com.bitlabs.App.Entity.AppliedApplicantInfo;
 import com.bitlabs.App.Entity.ApplyJob;
 import com.bitlabs.App.Entity.ApplyJobStatusHistory;
 import com.bitlabs.App.Entity.Job;
 import com.bitlabs.App.dto.ApplicantDetailsDTO;
 import com.bitlabs.App.dto.ApplicantJobInterviewDTO;
+import com.bitlabs.App.dto.AppliedApplicantInfo;
 import com.bitlabs.App.dto.AppliedApplicantInfoDTO;
 import com.bitlabs.App.dto.ApplyJobStatusHistoryDTO;
 

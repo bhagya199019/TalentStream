@@ -3,6 +3,8 @@ package com.bitlabs.App.Service;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+
+import com.bitlabs.App.Entity.Alert;
 import com.bitlabs.App.Entity.JobApplicant;
 
 

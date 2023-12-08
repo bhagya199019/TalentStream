@@ -7,10 +7,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.bitlabs.App.Entity.AppliedApplicantInfo;
 import com.bitlabs.App.Entity.ApplyJob;
 import com.bitlabs.App.Entity.Job;
 import com.bitlabs.App.Entity.JobApplicant;
+import com.bitlabs.App.dto.AppliedApplicantInfo;
 
 @Repository
 public interface ApplyJobRepository extends JpaRepository<ApplyJob,Long>{
@@ -18,7 +18,7 @@ public interface ApplyJobRepository extends JpaRepository<ApplyJob,Long>{
 	List<ApplyJob>findByJobApplicantId(long JobApplicantId);
 	boolean existsByJobApplicantAndJob(JobApplicant applicant, Job job);
 	
-	@Query("SELECT NEW com.bitlabs.App.Entity.AppliedApplicantInfo(" +
+	@Query("SELECT NEW com.bitlabs.App.dto.AppliedApplicantInfo(" +
 		       " aj.applyjobid,a.name, a.email, a.mobilenumber, j.jobTitle, aj.applicantStatus, " +
 		       " j.minimumExperience, s.skillName, " +
 		       "j.minimumQualification, j.location) " +
@@ -34,7 +34,7 @@ public interface ApplyJobRepository extends JpaRepository<ApplyJob,Long>{
 	
 	    List<ApplyJob> findByJobApplicantIdAndApplicantStatus(long jobApplicantId, String applicantStatus);
 
-	    @Query("SELECT NEW com.bitlabs.App.Entity.AppliedApplicantInfo(" +
+	    @Query("SELECT NEW com.bitlabs.App.dto.AppliedApplicantInfo(" +
 	           " aj.applyjobid, a.name, a.email, a.mobilenumber, j.jobTitle, aj.applicantStatus, " +
 	           " j.minimumExperience, s.skillName, " +
 	           " j.minimumQualification, j.location) " +
@@ -50,7 +50,7 @@ public interface ApplyJobRepository extends JpaRepository<ApplyJob,Long>{
 	    );
 	    
 	    
-	    @Query("SELECT NEW com.bitlabs.App.Entity.AppliedApplicantInfo(" +
+	    @Query("SELECT NEW com.bitlabs.App.dto.AppliedApplicantInfo(" +
 	            " aj.applyjobid, a.name, a.email, a.mobilenumber, j.jobTitle, aj.applicantStatus, " +
 	            " j.minimumExperience, s.skillName, " +
 	            " j.minimumQualification, j.location) " +

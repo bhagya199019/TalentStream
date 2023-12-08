@@ -13,14 +13,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bitlabs.App.Entity.AppliedApplicantInfo;
+import com.bitlabs.App.Entity.Alert;
 import com.bitlabs.App.Entity.ApplyJobStatusHistory;
 import com.bitlabs.App.Entity.Job;
 import com.bitlabs.App.Entity.ScheduleInterview;
+import com.bitlabs.App.Service.AlertService;
 import com.bitlabs.App.Service.ApplyJobservice;
 import com.bitlabs.App.Service.ScheduleInterviewService;
 import com.bitlabs.App.dto.ApplicantDetailsDTO;
 import com.bitlabs.App.dto.ApplicantJobInterviewDTO;
+import com.bitlabs.App.dto.AppliedApplicantInfo;
 import com.bitlabs.App.dto.AppliedApplicantInfoDTO;
 import com.bitlabs.App.dto.ApplyJobStatusHistoryDTO;
 import com.bitlabs.App.dto.InterviewFeedbackUpdateDTO;
@@ -33,6 +35,9 @@ public class ApplyJobController {
 	
 	@Autowired
 	private ScheduleInterviewService scheduleInterviewService;
+	
+	@Autowired
+	private AlertService alertService;
 	
    @PostMapping("/applicant/applyjob/{applicantId}/{jobId}")
 	    public String saveJobForApplicant(
@@ -108,14 +113,6 @@ public class ApplyJobController {
    }
 
 
-/*	 @GetMapping("/recruiter/{recruiterId}/interviews/{status}")
- public List<ApplicantJobInterviewDTO> getApplicantJobInterviewInfo(
-         @PathVariable("recruiterId") long recruiterId,
-         @PathVariable("status") String status) {
-     return applyJobService.getApplicantJobInterviewInfoForRecruiterAndStatus(recruiterId, status);
- }*/
-   
-	 
 	 @GetMapping("/applicant/applyjob-status-history/{applyJobId}")
 	    public ResponseEntity<List<ApplyJobStatusHistory>> getApplicantStatusHistory(@PathVariable Long applyJobId) {
 	        List<ApplyJobStatusHistory> historyList = applyJobService.getApplicantStatusHistory(applyJobId);
@@ -132,6 +129,10 @@ public class ApplyJobController {
 	        return ResponseEntity.ok(applicantDetails);
 	    }
 	 
-	 
+	 @GetMapping("applicant/{applicantId}/getjob-alerts")
+	    public ResponseEntity<List<Alert>> getJobAlertsByApplicantId(@PathVariable Long applicantId) {
+	        List<Alert> alerts = alertService.getAlertsByApplicantId(applicantId);
+	        return ResponseEntity.ok(alerts);
+	    }
 	 
 }

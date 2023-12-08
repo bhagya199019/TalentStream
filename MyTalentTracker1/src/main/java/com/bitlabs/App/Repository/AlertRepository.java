@@ -9,6 +9,9 @@ import org.springframework.data.repository.query.Param;
 import com.bitlabs.App.Entity.Alert;
 
 public interface AlertRepository extends JpaRepository<Alert, Long> {
-    // You can add custom query methods here if needed
+   
+	@Query("SELECT a FROM Alert a LEFT JOIN FETCH a.jobApplicant WHERE a.jobApplicant.id = :applicantId")
+	List<Alert> findByJobApplicantId(@Param("applicantId") Long applicantId);
+
 	
 }

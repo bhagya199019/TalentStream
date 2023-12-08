@@ -1,6 +1,10 @@
 package com.bitlabs.App.ServiceImpl;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
@@ -14,27 +18,34 @@ import com.bitlabs.App.Entity.JobRecruiter;
 import com.bitlabs.App.Entity.RecruiterProfile;
 
 import com.bitlabs.App.Repository.AlertRepository;
+import com.bitlabs.App.Repository.ApplyJobRepository;
 import com.bitlabs.App.Service.AlertService;
+
+import jakarta.transaction.Transactional;
 
 	@Service
 public class AlertServiceImpl implements AlertService {
 
+		@Autowired
+		private ApplyJobRepository applyJobRepository;
+		
 		@Autowired
 	    private AlertRepository alertRepository;
 
 	    @Autowired
 	    private JavaMailSender javaMailSender; // Autowire JavaMailSender bean
 
+	 
 	    public void sendAlert(JobRecruiter recruiter, ApplyJob applyJob, String alertMessage) {
 	        // Assuming each ApplyJob is associated with one JobApplicant
 	        JobApplicant applicant = applyJob.getJobApplicant();
 
 	        Alert alert = new Alert();
-	        alert.setRecruiter(recruiter);
+	    //    alert.setRecruiter(recruiter);
 	        alert.setCompanyName(recruiter.getCompanyName());
 	        alert.setAlertMessage(alertMessage);
 	        alert.setAlertDate(LocalDateTime.now());
-
+	        alert.setJobApplicant(applicant);
 	        alertRepository.save(alert);
 
 	        // Send email to the applicant
@@ -52,8 +63,14 @@ public class AlertServiceImpl implements AlertService {
 
 	        javaMailSender.send(message);
 	    }
-	}
+	    
+	   
 	
+	
+	    
+	    public List<Alert> getAlertsByApplicantId(Long applicantId){
+	    	return alertRepository.findByJobApplicantId(applicantId);
+	    }
 
-
+	}
 
