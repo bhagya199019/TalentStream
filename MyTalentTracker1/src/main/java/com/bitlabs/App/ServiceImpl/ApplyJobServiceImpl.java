@@ -234,8 +234,6 @@ public List<ApplicantDetailsDTO> getJobApplicantsDetailsByStatus(Long jobId, Str
         detailsDTO.setMobileNumber(applyJob.getJobApplicant().getMobilenumber());
         detailsDTO.setJobTitle(applyJob.getJob().getJobTitle());
         detailsDTO.setApplicantStatus(applyJob.getApplicantStatus());
-      
-
         detailsDTO.setScheduleInterviews(convertToScheduleInterviewDTOs(applyJob.getScheduleInterviews()));
 
         applicantsDetails.add(detailsDTO);
