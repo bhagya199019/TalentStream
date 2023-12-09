@@ -76,6 +76,7 @@ public class ApplyJobController {
        return ResponseEntity.ok(updateMessage);
    }
    
+   
     
      
    @GetMapping("/applicant/checkstatus/{applyJobId}")
