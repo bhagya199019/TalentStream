@@ -77,8 +77,7 @@ public class ApplyJobController {
    }
    
    
-    
-     
+      
    @GetMapping("/applicant/checkstatus/{applyJobId}")
    public ResponseEntity<List<ApplyJobStatusHistoryDTO>> getApplicantStatus(@PathVariable Long applyJobId) {
        List<ApplyJobStatusHistoryDTO> historyDTOList = applyJobService.getApplicantStatus(applyJobId);

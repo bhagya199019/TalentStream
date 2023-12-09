@@ -29,5 +29,5 @@ public class JobAlertController {
 	        return ResponseEntity.ok(alerts);
 	    }
 
-
+    
 }
