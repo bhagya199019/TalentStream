@@ -40,7 +40,8 @@ public class ApplicantProfileController {
 	}
 	else {
 		
-		 return  applicantProfileService.createOrUpdateApplicantProfile(applicantId,applicantProfile);		}
+		 return  applicantProfileService.createOrUpdateApplicantProfile(applicantId,applicantProfile);		
+		 }
       }
 	
 	
@@ -49,7 +50,7 @@ public class ApplicantProfileController {
       public ResponseEntity<Optional<ApplicantProfile>> getApplicantProfileDetails(@PathVariable int profileid) {
           try {
               Optional<ApplicantProfile> applicantProfile = applicantProfileService.viewApplicantById(profileid);
-              System.out.println(applicantProfile);
+             // System.out.println(applicantProfile);
               if (applicantProfile.isPresent()) {
                   return ResponseEntity.ok(applicantProfile); // Profile found, return 200 OK
               } else {
