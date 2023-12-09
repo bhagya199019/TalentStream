@@ -53,7 +53,8 @@ public class ApplicantServiceimpl implements ApplicantService{
 			return jobApplicantRepository.findAll();	
 		}
 	
-		public JobApplicant viewApplicantById(Long applicantId) {
+	
+	public JobApplicant viewApplicantById(Long applicantId) {
 			
 			return jobApplicantRepository.getJobApplicantById(applicantId);
 		}
