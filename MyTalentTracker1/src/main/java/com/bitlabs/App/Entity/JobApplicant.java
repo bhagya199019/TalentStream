@@ -49,6 +49,9 @@ public class JobApplicant {
 	
 	@Column(nullable = false)
     private String roles="ROLE_JOBAPPLICANT";
+	
+	
+    private int alertCount = 0;
 
 	
 	

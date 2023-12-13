@@ -24,6 +24,7 @@ import com.bitlabs.App.Repository.JobApplicantRepository;
 import com.bitlabs.App.Repository.JobRepository;
 import com.bitlabs.App.Repository.ScheduleInterviewRepository;
 import com.bitlabs.App.Service.AlertService;
+import com.bitlabs.App.Service.ApplicantService;
 import com.bitlabs.App.Service.ApplyJobservice;
 import com.bitlabs.App.dto.ApplicantDetailsDTO;
 import com.bitlabs.App.dto.ApplicantJobInterviewDTO;
@@ -54,6 +55,9 @@ public class ApplyJobServiceImpl implements ApplyJobservice {
 	
 	@Autowired
 	private AlertRepository alertRepository;
+	
+	@Autowired
+	private ApplicantService applicantService;
 	
 	
 	 @Autowired
@@ -143,14 +147,47 @@ public String applicantApplyForJob(long applicantId, long jobId) {
         String oldStatus = applyJob.getApplicantStatus();
         applyJob.setApplicantStatus(newStatus);
         applyJobRepository.save(applyJob);
-         
-        saveStatusHistory(applyJob, oldStatus, newStatus);
-             
         sendStatusUpdateAlert(applyJob, oldStatus, newStatus);
+        
+     // Increment job alert count for the particular applicant
+        int alertCount =incrementJobAlertCount(applyJob.getJobApplicant().getId());
+        saveStatusHistory(applyJob, oldStatus, newStatus);
+        
         return "Applicant status updated to: " + newStatus;
     }
 	
+	public int incrementJobAlertCount(Long applicantId) {
+        JobApplicant jobApplicant = jobApplicantRepository.findById(applicantId)
+                .orElseThrow(() -> new IllegalArgumentException("JobApplicant not found"));
+
+        // Increment job alert count for the specified applicant
+        int updatedCount = jobApplicant.getAlertCount() + 1;
+        jobApplicant.setAlertCount(updatedCount);
+
+        // Assuming you have a repository for JobApplicant, use it to save the changes
+        jobApplicantRepository.save(jobApplicant);
+
+        return updatedCount;
+    }
 	
+	public int resetJobAlertCount(Long applicantId) {
+        JobApplicant jobApplicant = jobApplicantRepository.findById(applicantId)
+                .orElseThrow(() -> new IllegalArgumentException("JobApplicant not found"));
+
+    
+
+        // Reset the job alert count for the specified applicant to zero
+        jobApplicant.setAlertCount(0);
+        
+        // Get the current job alert count
+        int currentCount = jobApplicant.getAlertCount();
+
+        // Save the updated JobApplicant entity to persist the reset count
+        jobApplicantRepository.save(jobApplicant);
+
+        // Return the current count (count before reset)
+        return currentCount;
+	}
 	
 	private void sendStatusUpdateAlert(ApplyJob applyJob, String oldStatus, String newStatus) {
         // Retrieve the recruiter profile associated with the job
@@ -223,20 +260,31 @@ public List<ApplyJobStatusHistoryDTO> getApplicantStatus(Long applyJobId) {
 
 
 
-public List<ApplicantDetailsDTO> getJobApplicantsDetailsByStatus(Long jobId, String applicantStatus) {
-    List<ApplyJob> applyJobs = applyJobRepository.findByJobIdAndApplicantStatus(jobId, applicantStatus);
+public List<ApplicantDetailsDTO> getJobApplicantsDetailsByStatus(String applicantStatus) {
+    List<JobApplicant>jobApplicants =jobApplicantRepository.findByAppliedJobsApplicantStatus(applicantStatus);
+    System.out.println(applicantStatus);
+    System.out.println(jobApplicants);
     List<ApplicantDetailsDTO> applicantsDetails = new ArrayList<>();
 
-    for (ApplyJob applyJob : applyJobs) {
+    for (JobApplicant jobApplicant : jobApplicants) {
+        for (ApplyJob applyJob : jobApplicant.getAppliedJobs()) {
+        	 if (applyJob.getApplicantStatus().equals(applicantStatus)) {
         ApplicantDetailsDTO detailsDTO = new ApplicantDetailsDTO();
-        detailsDTO.setCandidateName(applyJob.getJobApplicant().getName());
-        detailsDTO.setEmail(applyJob.getJobApplicant().getEmail());
-        detailsDTO.setMobileNumber(applyJob.getJobApplicant().getMobilenumber());
-        detailsDTO.setJobTitle(applyJob.getJob().getJobTitle());
+        detailsDTO.setCandidateName(jobApplicant.getName());
+        detailsDTO.setEmail(jobApplicant.getEmail());
+        detailsDTO.setMobileNumber(jobApplicant.getMobilenumber());
+     // Assuming getJob() returns the job title
+        if (applyJob.getJob() != null) {
+            detailsDTO.setJobTitle(applyJob.getJob().getJobTitle());
+        }
+
         detailsDTO.setApplicantStatus(applyJob.getApplicantStatus());
         detailsDTO.setScheduleInterviews(convertToScheduleInterviewDTOs(applyJob.getScheduleInterviews()));
 
         applicantsDetails.add(detailsDTO);
+        	 }
+     
+    }
     }
 
     return applicantsDetails;

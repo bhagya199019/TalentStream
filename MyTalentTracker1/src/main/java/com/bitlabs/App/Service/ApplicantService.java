@@ -13,6 +13,6 @@ public interface ApplicantService {
 	public JobApplicant findByEmailAddress(String userEmail);
 	public ResponseEntity<String> saveApplicant(JobApplicant applicant);
 	public List<JobApplicant> getAllApplicants();
-	
+	 public List<JobApplicant> getApplicantsByStatus(String applicantStatus);
 
 }

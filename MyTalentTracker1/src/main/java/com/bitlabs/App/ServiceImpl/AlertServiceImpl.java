@@ -67,6 +67,7 @@ public class AlertServiceImpl implements AlertService {
 	   
     
 	    public List<Alert> getAlertsByApplicantId(Long applicantId){
+	    	
 	    	return alertRepository.findByJobApplicantId(applicantId);
 	    }
 

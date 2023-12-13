@@ -42,5 +42,11 @@ public interface ApplyJobservice {
 	public List<ApplicantJobInterviewDTO> getApplicantJobInterviewInfoForRecruiterAndStatus(
 	        long recruiterId, String applicantStatus);
 	
-	public List<ApplicantDetailsDTO> getJobApplicantsDetailsByStatus(Long jobId, String applicantStatus);
+//	public List<ApplicantDetailsDTO> getJobApplicantsDetailsByStatus(Long jobId, String applicantStatus);
+	
+	public int incrementJobAlertCount(Long applicantId);
+	
+	public int resetJobAlertCount(Long applicantId);
+	
+	public List<ApplicantDetailsDTO> getJobApplicantsDetailsByStatus(String applicantStatus);
 }

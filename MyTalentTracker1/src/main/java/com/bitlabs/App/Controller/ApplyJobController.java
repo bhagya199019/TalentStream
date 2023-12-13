@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bitlabs.App.Entity.Alert;
 import com.bitlabs.App.Entity.ApplyJobStatusHistory;
 import com.bitlabs.App.Entity.Job;
+import com.bitlabs.App.Entity.JobApplicant;
 import com.bitlabs.App.Entity.ScheduleInterview;
 import com.bitlabs.App.Service.AlertService;
+import com.bitlabs.App.Service.ApplicantService;
 import com.bitlabs.App.Service.ApplyJobservice;
 import com.bitlabs.App.Service.ScheduleInterviewService;
 import com.bitlabs.App.dto.ApplicantDetailsDTO;
@@ -38,6 +40,9 @@ public class ApplyJobController {
 	
 	@Autowired
 	private AlertService alertService;
+	
+	@Autowired
+	private ApplicantService applicantService;
 	
    @PostMapping("/applicant/applyjob/{applicantId}/{jobId}")
 	    public String saveJobForApplicant(
@@ -121,14 +126,13 @@ public class ApplyJobController {
 	 
 	 
 	 
-	 @GetMapping("recruiter/applicant-details/{jobId}/{applicantStatus}")
-	    public ResponseEntity<List<ApplicantDetailsDTO>> getApplicantDetails(
-	            @PathVariable Long jobId,
-	            @PathVariable String applicantStatus) {
-	        List<ApplicantDetailsDTO> applicantDetails = applyJobService.getJobApplicantsDetailsByStatus(jobId, applicantStatus);
+
+	 
+	 @GetMapping("/recruiter/applicantsInfo/{applicantStatus}")
+	 public ResponseEntity<List<ApplicantDetailsDTO>>getApplicantsByStatus(@PathVariable String applicantStatus) {
+		 List<ApplicantDetailsDTO> applicantDetails=applyJobService.getJobApplicantsDetailsByStatus(applicantStatus);
 	        return ResponseEntity.ok(applicantDetails);
 	    }
-	 
 	 
 	 
 }

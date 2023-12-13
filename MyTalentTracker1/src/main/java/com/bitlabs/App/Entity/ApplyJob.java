@@ -54,12 +54,10 @@ public class ApplyJob {
     private LocalDateTime applicationDate;
     
     
-    
- 
     @OneToMany(mappedBy = "applyJob", cascade = CascadeType.ALL)
     @JsonManagedReference
     @JsonIgnore
-private List<ApplyJobStatusHistory> statusHistory;
+    private List<ApplyJobStatusHistory> statusHistory;
     	
 
 	

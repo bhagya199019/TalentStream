@@ -70,7 +70,7 @@ public class ApplicantControllerTest {
     private AuthenticationManager authenticationManager;
  
   
- 
+
     @Mock
     private RecruiterService recruiterService;
  
