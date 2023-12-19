@@ -24,7 +24,7 @@ public class Contact {
 	
 	private String question;
 	
-	private String me
+	private String message;
 	
 	
 }*/
