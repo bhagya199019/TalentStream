@@ -1,14 +1,10 @@
 package com.bitlabs.App.Controller;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.GetMapping;
+
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,6 +17,7 @@ import com.bitlabs.App.Service.EmailService;
 import com.bitlabs.App.Service.OtpService;
 import com.bitlabs.App.dto.NewPasswordRequestDTO;
 import com.bitlabs.App.dto.OtpVerificationDTO;
+import com.bitlabs.App.dto.ResendOtpDTO;
 import com.bitlabs.App.dto.SendOtpDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -49,8 +46,7 @@ public class ApplicantController {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
-	//private Map<String, Boolean> otpVerificationMap = new HashMap<>();
-
+	
     @PostMapping("/applicant/send-otp")
     public ResponseEntity<String> sendOtp(@RequestBody SendOtpDTO  request) {
         String userEmail = request.getEmail();
@@ -109,7 +105,8 @@ public class ApplicantController {
 		return ResponseEntity.badRequest().body(" Applicant email not registered");
 	}
 	
-
+	      
+	     
 }
    
      @PostMapping("/applicant/reset-password/{email}")
@@ -163,8 +160,25 @@ public class ApplicantController {
 
        return ResponseEntity.noContent().build();
    }
+   
+   @PostMapping("/applicant/resend-otp")
+   public ResponseEntity<String> resendOtp(@RequestBody ResendOtpDTO request) {
+       String userEmail = request.getEmail();
+       
+       JobApplicant jobApplicant = registerApplicantService.findByEmailAddress(userEmail);
+       if (jobApplicant == null) {
+           if (otpService.isOtpExpired(userEmail) && otpService.canResendOtp(userEmail)) {
+               String otp = otpService.generateOtp(userEmail);
+               emailService.sendOtpEmail(userEmail, otp);
+               return ResponseEntity.ok("OTP resent to your email.");
+           } else {
+               return ResponseEntity.badRequest().body("Resend OTP is not allowed at this time.");
+           }
+       } else {
+           return ResponseEntity.badRequest().body("Email is already registered.");
+       }
+   }
 
-}   
 
-    
 
+}

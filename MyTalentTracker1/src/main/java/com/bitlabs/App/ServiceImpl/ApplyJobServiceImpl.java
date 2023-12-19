@@ -1,5 +1,6 @@
 package com.bitlabs.App.ServiceImpl;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -63,14 +64,14 @@ public class ApplyJobServiceImpl implements ApplyJobservice {
 	 @Autowired
 	private ApplyJobStatusHistoryRepository applyJobStatusHistoryRepository;
 	
-public String applicantApplyForJob(long applicantId, long jobId) {
+/*public String applicantApplyForJob(long applicantId, long jobId) {
 		JobApplicant jobApplicant=jobApplicantRepository.findById(applicantId);
 		
 		System.out.println("jobApplicant is"+jobApplicant);
 		Job job=jobRepository.findById(jobId).orElse(null);
 	//	System.out.println("job is"+job);
 		
-		if(jobApplicant==null && job==null) {
+		if(jobApplicant==null || job==null) {
 			return "Applicant Id or job Id not null";
 		}
 		
@@ -90,7 +91,34 @@ public String applicantApplyForJob(long applicantId, long jobId) {
 		}
 		
 	}
-	
+	*/
+	 
+	 public String applicantApplyForJob(long applicantId, long jobId) {
+		    JobApplicant jobApplicant = jobApplicantRepository.findById(applicantId);
+		    Job job = jobRepository.findById(jobId).orElse(null);
+
+		    if (jobApplicant == null || job == null) {
+		        return "Applicant Id or job Id not valid";
+		    } else {
+		        // Check if the job is still active
+		        if (job.getExpirationDate().isBefore(LocalDate.now())) {
+		            return "Job has reached its expiration date. Unable to apply.";
+		        }
+
+		        if (!applyJobRepository.existsByJobApplicantAndJob(jobApplicant, job)) {
+		            ApplyJob applyJob = new ApplyJob();
+		            applyJob.setJobApplicant(jobApplicant);
+		            applyJob.setJob(job);
+		            // Set the application date to the current date and time
+		            applyJob.setApplicationDate(LocalDateTime.now());
+		            applyJobRepository.save(applyJob);
+		            return "Job Applied Successfully";
+		        } else {
+		            return "Job has already been applied by the applicant";
+		        }
+		    }
+		}
+
 	
 	public List<AppliedApplicantInfoDTO> getAppliedApplicants(long jobRecruiterId) {
 		List<AppliedApplicantInfo> appliedApplicants = applyJobRepository.findAppliedApplicantsInfo(jobRecruiterId);
@@ -142,7 +170,7 @@ public String applicantApplyForJob(long applicantId, long jobId) {
 	
 	public String updateApplicantStatus(Long applyJobId, String newStatus) {
         ApplyJob applyJob = applyJobRepository.findById(applyJobId)
-                .orElseThrow();
+                .orElseThrow(() -> new IllegalArgumentException("apply job  not found"));
 
         String oldStatus = applyJob.getApplicantStatus();
         applyJob.setApplicantStatus(newStatus);

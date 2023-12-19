@@ -40,7 +40,5 @@ public class ApplicantProfileServiceImpl implements ApplicantProfileService {
 		return applicantProfileRepository.findById(profileId);
 	}
 	
-	public void deleteApplicantById(int  profileId) {
-	applicantProfileRepository.deleteById(profileId);
-	}
+	
 }

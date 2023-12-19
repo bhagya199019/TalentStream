@@ -77,7 +77,7 @@ public class CompanyLogoServiceImpl implements CompanyLogoService {
 
 		    private void updateCompanyLogo(CompanyLogo existingLogo, JobRecruiter recruiter, String fileName) {
 		        // Update the existing record
-		      //  System.out.println("Updating company logo");
+		     
 		        existingLogo.setLogoName(fileName);
 		        existingLogo.setJobRecruiter(recruiter);
 		        companyLogoRepository.save(existingLogo);
@@ -85,8 +85,8 @@ public class CompanyLogoServiceImpl implements CompanyLogoService {
 
 		    private void insertCompanyLogo(JobRecruiter recruiter, String fileName) {
 		        // Insert a new record
-		      //  System.out.println("Inserting new company logo");
-		        CompanyLogo companyLogo = new CompanyLogo();
+		    
+               CompanyLogo companyLogo = new CompanyLogo();
 		        companyLogo.setLogoName(fileName);
 		        companyLogo.setJobRecruiter(recruiter);
 		        companyLogoRepository.save(companyLogo);

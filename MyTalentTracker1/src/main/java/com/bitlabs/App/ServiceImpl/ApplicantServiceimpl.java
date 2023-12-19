@@ -63,4 +63,7 @@ public class ApplicantServiceimpl implements ApplicantService{
 	  public List<JobApplicant> getApplicantsByStatus(String applicantStatus) {
 	        return jobApplicantRepository.findByAppliedJobsApplicantStatus(applicantStatus);
 	    }
+	  
+	  
+	 
 }

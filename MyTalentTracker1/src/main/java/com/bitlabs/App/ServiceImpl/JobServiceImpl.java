@@ -22,30 +22,14 @@ public class JobServiceImpl implements JobService {
 	 
 	 
 	 public List<Job> getJobsByRecruiter(Long jobRecruiterId) {
-	        // You need to implement the logic to retrieve jobs by recruiter ID.
 	        
-	        // Replace "findByJobRecruiterId" with the actual method you use to retrieve jobs by recruiter ID.
 	        List<Job> jobs = jobRepository.findByJobRecruiterId(jobRecruiterId);
-
-	 
 
 	        return jobs;
 	    }
 	   
 	 
-//	public List<Job> searchJobsByKeyword(String keyword) {
-	//        return jobRepository.searchJobsByKeyword(keyword);
-	  //  }
-	 
-	 
- //public List<Job> searchJobsByKeywordAndjobId(String keyword, Long jobId) {
-	//        return jobRepository.searchJobsByKeywordAndjobId(keyword, jobId);
-	  //  }
-	
-//	 public List<Job> searchJobsByKeyword(
-		//	    String keyword, Long id, Integer minExperience, Integer maxExperience, Double maxSalary) {
-	//		    return jobRepository.searchJobsByKeyword(keyword, id, minExperience, maxExperience, maxSalary);
-		//	}
+
 
 	 
 	 public List<Job> searchJobsByFilters(

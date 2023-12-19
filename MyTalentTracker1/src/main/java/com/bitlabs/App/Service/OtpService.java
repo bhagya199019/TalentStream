@@ -12,5 +12,7 @@ public interface OtpService {
 	 //   boolean isEmailAssociatedWithOtp(String userEmail);
 	    
 	    boolean isOtpExpired(String userEmail);
+	    
+	    public boolean canResendOtp(String userEmail);
 	}
 

@@ -8,6 +8,6 @@ public interface ApplicantProfileService {
 	
 	public String createOrUpdateApplicantProfile(long applicantId, ApplicantProfile applicantProfile);
 	public Optional<ApplicantProfile>viewApplicantById(int profileId);
-	public void deleteApplicantById(int applicantId);
+	
 
 }

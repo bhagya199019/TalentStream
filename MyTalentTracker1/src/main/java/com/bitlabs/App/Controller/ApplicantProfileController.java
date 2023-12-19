@@ -63,11 +63,7 @@ public class ApplicantProfileController {
       }
 	      
 	 
-	 @DeleteMapping("/applicant/deletedetails/{applicantId}")
-	       public ResponseEntity<Void> deleteApplicantProfile(@PathVariable int applicantId) {
-	           applicantProfileService.deleteApplicantById(applicantId);
-	           return ResponseEntity.noContent().build();
-	       }
+	 
 		
 }
 	

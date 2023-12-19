@@ -227,7 +227,7 @@ public class ApplicantControllerTest {
         // Assert
         assertNotNull(response);
         assertEquals(ResponseEntity.badRequest().body("Incorrect OTP."), response);
-        // Add more assertions if needed
+       
     }
     
     

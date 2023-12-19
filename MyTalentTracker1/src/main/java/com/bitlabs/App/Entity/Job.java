@@ -1,5 +1,6 @@
 package com.bitlabs.App.Entity;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -111,20 +112,18 @@ public class Job {
     @Column
 
     private byte[] uploadDocument; // Use byte[] to store the file content
+    
+    
+    @Column(name = "posted_date", nullable = false)
+    private LocalDate postedDate;
+
+    @Column(name = "expiration_date", nullable = false)
+    private LocalDate expirationDate;
+
 
  
 
-	@Override
-	public String toString() {
-		return "Job [id=" + id + ", jobRecruiter=" + jobRecruiter + ", jobTitle=" + jobTitle + ", minimumExperience="
-				+ minimumExperience + ", maximumExperience=" + maximumExperience + ", maxSalary=" + maxSalary
-				+ ", minSalary=" + minSalary + ", location=" + location + ", employeeType=" + employeeType
-				+ ", industryType=" + industryType + ", minimumQualification=" + minimumQualification
-				+ ", specialization=" + specialization + ", skillsRequired=" + skillsRequired + ", jobHighlights="
-				+ jobHighlights + ", description=" + description + ", uploadDocument=" + Arrays.toString(uploadDocument)
-				+ "]";
-	}
-
+	
 
 
 }

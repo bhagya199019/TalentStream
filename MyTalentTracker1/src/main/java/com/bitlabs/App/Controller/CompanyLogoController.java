@@ -22,7 +22,7 @@ public class CompanyLogoController {
 		
 	
 		
-	    @PostMapping("/companylogo/upload/{jobRecruiterId}")
+	    @PostMapping("/recruiter/companylogo/upload/{jobRecruiterId}")
 	    public String fileUpload(@PathVariable Long jobRecruiterId,@RequestParam  MultipartFile logoFile)
 	    {
 	    	try {

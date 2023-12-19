@@ -1,5 +1,6 @@
 package com.bitlabs.App.Controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ public class JobController {
 	
 	
 	
-	@PostMapping("/recruiter/post-job/{jobRecruiterid}")
+/*	@PostMapping("/recruiter/post-job/{jobRecruiterid}")
  public ResponseEntity<String> postJob(@RequestBody  @Valid Job job,@PathVariable Long jobRecruiterid){
 		JobRecruiter jobRecruiter=jobRecruiterRepository.findByRecruiterId(jobRecruiterid);
 		
@@ -44,7 +45,31 @@ public class JobController {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Job recruiter with id"+jobRecruiterid+"not found");
 		}
 		
-	 }
+	 }*/
+	
+	@PostMapping("/recruiter/post-job/{jobRecruiterid}")
+	public ResponseEntity<String> postJob(@RequestBody @Valid Job job, 
+	                                      @PathVariable Long jobRecruiterid,
+	                                      @RequestParam(defaultValue = "30") int expirationPeriodInDays) {
+	    JobRecruiter jobRecruiter = jobRecruiterRepository.findByRecruiterId(jobRecruiterid);
+
+	    if (jobRecruiter != null) {
+	        job.setJobRecruiter(jobRecruiter);
+	        
+	        // Set the posted date to the current date
+	        job.setPostedDate(LocalDate.now());
+
+	        // Set the expiration date based on the posted date and expiration period
+	        job.setExpirationDate(job.getPostedDate().plusDays(expirationPeriodInDays));
+
+	        jobService.postJob(job);
+
+	        return ResponseEntity.status(HttpStatus.OK).body("Job posted successfully");
+	    } else {
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Job recruiter with id " + jobRecruiterid + " not found");
+	    }
+	}
+
 	
 
 

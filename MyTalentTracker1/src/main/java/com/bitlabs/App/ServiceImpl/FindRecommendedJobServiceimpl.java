@@ -25,6 +25,7 @@ public class FindRecommendedJobServiceimpl implements FindRecommendedJobService 
 	@Autowired
 	private JobRepository jobRepository;
 	
+	
 	public List<Job>findJobByMatchingSkills(int applicantProfileId){
 		
 		ApplicantProfile applicantProfile= applicantProfileRepository.findByApplicantId(applicantProfileId);
@@ -40,10 +41,6 @@ public class FindRecommendedJobServiceimpl implements FindRecommendedJobService 
 		
 	}
 	
-	
-	
-	
-	
-	
+		
 
 }
