@@ -124,10 +124,7 @@ public class ApplyJobController {
 	        return ResponseEntity.ok(historyList);
 	    }
 	 
-	 
-	 
-
-	 
+	  
 	 @GetMapping("/recruiter/applicantsInfo/{applicantStatus}")
 	 public ResponseEntity<List<ApplicantDetailsDTO>>getApplicantsByStatus(@PathVariable String applicantStatus) {
 		 List<ApplicantDetailsDTO> applicantDetails=applyJobService.getJobApplicantsDetailsByStatus(applicantStatus);

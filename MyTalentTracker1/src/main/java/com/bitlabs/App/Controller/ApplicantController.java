@@ -150,13 +150,43 @@ public class ApplicantController {
    
    @PostMapping("/applicant/resend-otp")
    public ResponseEntity<String> resendOtp(@RequestBody ResendOtpDTO request) {
+	    String userEmail = request.getEmail();
+
+	    JobApplicant jobApplicant = registerApplicantService.findByEmailAddress(userEmail);
+	    if (jobApplicant == null) {
+	        if (otpService.canResendOtp(userEmail)) {
+	            String otp = otpService.generateOtp(userEmail);
+	            try {
+	                emailService.sendOtpEmail(userEmail, otp);
+	                return ResponseEntity.ok("OTP resent to your email.");
+	            } catch (Exception e) {
+	                return ResponseEntity.badRequest().body("Failed to send OTP. Please try again.");
+	            }
+	        } else {
+	            return ResponseEntity.badRequest().body("Resend OTP is not allowed at this time.");
+	        }
+	    } else {
+	        return ResponseEntity.badRequest().body("Email is already registered.");
+	    }
+	}
+
+
+
+   
+   
+   
+ /*  @PostMapping("/applicant/resend-otp")
+   public ResponseEntity<String> resendOtp(@RequestBody ResendOtpDTO request) {
        String userEmail = request.getEmail();
-       
+
        JobApplicant jobApplicant = registerApplicantService.findByEmailAddress(userEmail);
        if (jobApplicant == null) {
-           if (otpService.isOtpExpired(userEmail) && otpService.canResendOtp(userEmail)) {
-               String otp = otpService.generateOtp(userEmail);
-               emailService.sendOtpEmail(userEmail, otp);
+           OtpService.OtpData otpData = otpService.getOtpData(userEmail);
+
+           if (otpData == null || !otpData.isExpired()) {
+               String newOtp = otpService.generateOtp(userEmail);
+               otpService.markAsResent(userEmail); // Mark the new OTP as resent
+               emailService.sendOtpEmail(userEmail, newOtp);
                return ResponseEntity.ok("OTP resent to your email.");
            } else {
                return ResponseEntity.badRequest().body("Resend OTP is not allowed at this time.");
@@ -165,25 +195,7 @@ public class ApplicantController {
            return ResponseEntity.badRequest().body("Email is already registered.");
        }
    }
-
-
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
+*/
    
    /*   @PostMapping("/applicant/signOut")
    public ResponseEntity<Void> signOut(HttpServletRequest request) {

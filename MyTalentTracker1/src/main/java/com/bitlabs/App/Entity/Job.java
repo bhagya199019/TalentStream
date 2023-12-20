@@ -47,7 +47,7 @@ public class Job {
     @Column(nullable = false)
     private String jobTitle;
 
- @Column(nullable = false)
+   @Column(nullable = false)
    private int minimumExperience;
 
    @Column(nullable = false)
@@ -55,10 +55,9 @@ public class Job {
 
  
     @Column(nullable = false)
-
     private double maxSalary;
+   
     @Column(nullable = false)
-
     private double minSalary;
  
   
@@ -121,9 +120,6 @@ public class Job {
     private LocalDate expirationDate;
 
 
- 
-
-	
 
 
 }

@@ -78,5 +78,13 @@ public class OtpServiceImpl implements OtpService {
         public void markAsResent() {
             this.lastResendTime = System.currentTimeMillis();
         }
+        
+        
+    /*    public void markAsResent(String userEmail) {
+            OtpData otpData = otpMap.get(userEmail);
+            if (otpData != null) {
+                otpData.markAsResent();
+            }
+        }*/
     }
 }
