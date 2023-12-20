@@ -147,19 +147,7 @@ public class ApplicantController {
 	}
 
    
-   @PostMapping("/applicant/signOut")
-   public ResponseEntity<Void> signOut(HttpServletRequest request) {
-	   
-       System.out.println("Checking");
 
-       // Get the current session and invalidate it
-       HttpSession session = request.getSession(false);
-       if (session != null) {
-           session.invalidate();
-       }
-
-       return ResponseEntity.noContent().build();
-   }
    
    @PostMapping("/applicant/resend-otp")
    public ResponseEntity<String> resendOtp(@RequestBody ResendOtpDTO request) {
@@ -180,5 +168,35 @@ public class ApplicantController {
    }
 
 
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   /*   @PostMapping("/applicant/signOut")
+   public ResponseEntity<Void> signOut(HttpServletRequest request) {
+	   
+       System.out.println("Checking");
 
+       // Get the current session and invalidate it
+       HttpSession session = request.getSession(false);
+       if (session != null) {
+           session.invalidate();
+       }
+
+       return ResponseEntity.noContent().build();
+   }*/
 }
