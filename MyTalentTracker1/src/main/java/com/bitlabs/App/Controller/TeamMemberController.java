@@ -24,11 +24,11 @@ public class TeamMemberController {
         TeamMember savedTeamMember = teamMemberService.addTeamMemberToRecruiter(recruiterId, teamMember);
 
         if (savedTeamMember == null) {
-            // Handle the case where the recruiter doesn't exist
+            
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        // You can customize the response or return the saved team member
+      
         return new ResponseEntity<>(savedTeamMember, HttpStatus.CREATED);
     }
 

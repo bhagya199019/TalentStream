@@ -55,8 +55,7 @@ public class ApplicantController {
         if (jobApplicant == null) {     
             String otp = otpService.generateOtp(userEmail);
          	            emailService.sendOtpEmail(userEmail, otp);
- 	          //  otpVerificationMap.put(userEmail, true);
- 	            return ResponseEntity.ok("OTP sent to your email.");
+ 	          return ResponseEntity.ok("OTP sent to your email.");
         }
 
         else {
