@@ -40,7 +40,7 @@ public class ApplyJob {
 
 	@ManyToOne
     @JoinColumn(name ="job_id")
-    private Job job;
+	private Job job;
     
     @Column(nullable = false)
     private String applicantStatus = "New";

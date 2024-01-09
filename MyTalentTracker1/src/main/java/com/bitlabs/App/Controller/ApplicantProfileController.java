@@ -29,7 +29,7 @@ public class ApplicantProfileController {
  private ApplicantProfileService applicantProfileService;
 	
 	
-      @PostMapping("/applicant/createProfile/{applicantId}")
+      @PostMapping("/applicants/createProfile/{applicantId}")
   public String createOrUpdateProfile(@RequestBody ApplicantProfile applicantProfile,
 		  @PathVariable long applicantId){
 	
@@ -46,7 +46,7 @@ public class ApplicantProfileController {
 	
 	
       
-      @GetMapping("/applicant/getapplicantProfileDetails/{profileid}")
+      @GetMapping("/applicants/getapplicantProfileDetails/{profileid}")
       public ResponseEntity<Optional<ApplicantProfile>> getApplicantProfileDetails(@PathVariable int profileid) {
           try {
               Optional<ApplicantProfile> applicantProfile = applicantProfileService.viewApplicantById(profileid);

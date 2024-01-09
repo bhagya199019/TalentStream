@@ -19,7 +19,7 @@ public class SearchForaJobController {
 	@Autowired
     private SearchForaJobService jobSearchService;
  
-    @GetMapping("/applicant/searchjobbyskillname/{applicantId}/jobs/{skillName}")
+    @GetMapping("/applicants/searchjobbyskillname/{applicantId}/jobs/{skillName}")
     public ResponseEntity<Page<Job>> searchJobsBySkillAndApplicant(
     		@PathVariable int applicantId,
             @PathVariable String skillName,

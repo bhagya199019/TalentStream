@@ -65,5 +65,13 @@ public class ApplicantServiceimpl implements ApplicantService{
 	    }
 	  
 	  
-	 
+	  public JobApplicant login(String email, String password) {
+			JobApplicant applicant = jobApplicantRepository.findByEmail(email);
+			 if (applicant!= null && passwordEncoder.matches(password, applicant.getPassword())) {
+		         return applicant ; 
+		     }  else {
+		         return null; 
+		     }
+
+		}
 }

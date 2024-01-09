@@ -1,20 +1,31 @@
 package com.bitlabs.App.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bitlabs.App.Entity.AuthenticationResponse;
 import com.bitlabs.App.Entity.JobApplicant;
 import com.bitlabs.App.Entity.Login;
 import com.bitlabs.App.Repository.JobApplicantRepository;
+import com.bitlabs.App.Response.ResponseHandler;
 import com.bitlabs.App.Service.EmailService;
+
 import com.bitlabs.App.Service.OtpService;
+import com.bitlabs.App.ServiceImpl.JwtUtilService;
+import com.bitlabs.App.ServiceImpl.MyUserDetailsService;
 import com.bitlabs.App.dto.NewPasswordRequestDTO;
 import com.bitlabs.App.dto.OtpVerificationDTO;
 import com.bitlabs.App.dto.ResendOtpDTO;
@@ -29,6 +40,7 @@ import com.bitlabs.App.Service.ApplicantService;
 
 
 @RestController
+// @CrossOrigin(origins = "http://localhost:3000")
 public class ApplicantController {
 	
 	@Autowired
@@ -45,6 +57,15 @@ public class ApplicantController {
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	
+	 @Autowired
+		private AuthenticationManager authenticationManager;
+	 
+	 @Autowired
+  MyUserDetailsService myUserDetailsService;
+	 
+	 @Autowired
+	 JwtUtilService jwtTokenUtil;
 	
 	
     @PostMapping("/applicant/send-otp")
@@ -130,7 +151,7 @@ public class ApplicantController {
 	        return ResponseEntity.ok("Password reset was done successfully");
 	    }
  
-   @PostMapping("/applicant/login")
+ /*  @PostMapping("/applicant/login")
    public ResponseEntity<String> loginApplicant(@RequestBody Login request) throws Exception {
 	    String email = request.getEmail();
 	    String password = request.getPassword();
@@ -143,6 +164,36 @@ public class ApplicantController {
 	    } else {
 	        return ResponseEntity.ok("Login successfully");
 	    }
+	}
+*/
+     
+     
+     @PostMapping("/applicants/login")
+     public ResponseEntity<Object> loginApplicant(@RequestBody Login loginRequest) throws Exception {
+    	 JobApplicant applicant = registerApplicantService.login(loginRequest.getEmail(), loginRequest.getPassword());
+        System.out.println(loginRequest.getEmail());
+        System.out.println(applicant.getEmail());
+        if (applicant!=null) {
+        	return createAuthenticationToken(loginRequest, applicant);
+        } else {
+            return new ResponseEntity<>("failed", HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    private ResponseEntity<Object> createAuthenticationToken(Login loginRequest,  JobApplicant applicant ) throws Exception {
+			    	try {
+			authenticationManager.authenticate(
+					new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword())
+			);
+		}
+		catch (BadCredentialsException e) {
+			throw new Exception("Incorrect username or password", e);
+		}
+    	 UserDetails userDetails = myUserDetailsService.loadUserByUsername(applicant.getEmail());
+    	System.out.println(userDetails.getUsername());
+		final String jwt = jwtTokenUtil.generateToken(userDetails);
+		System.out.println(jwt);
+		return ResponseHandler.generateResponse("Login successfully"+userDetails.getAuthorities(), HttpStatus.OK, new AuthenticationResponse(jwt),applicant.getEmail(),applicant.getName(),applicant.getId());
 	}
 
    
@@ -172,7 +223,13 @@ public class ApplicantController {
 
 
 
-   
+   @PostMapping("/applicantLogOut")
+   public ResponseEntity<Void> signOut(@AuthenticationPrincipal JobApplicant user) {
+   	System.out.println("checking");
+       SecurityContextHolder.clearContext();
+       return ResponseEntity.noContent().build();
+   }
+}
    
    
  /*  @PostMapping("/applicant/resend-otp")
@@ -210,4 +267,4 @@ public class ApplicantController {
 
        return ResponseEntity.noContent().build();
    }*/
-}
+

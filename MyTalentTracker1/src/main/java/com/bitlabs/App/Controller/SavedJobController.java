@@ -15,7 +15,7 @@ public class SavedJobController {
   @Autowired
  private SavedJobService savedJobService; 
 
-	 @PostMapping("/applicant/saveJob/{applicantId}/{jobId}")
+	 @PostMapping("/applicants/saveJob/{applicantId}/{jobId}")
   public ResponseEntity<String>saveJobByApplicant(@PathVariable long applicantId,@PathVariable long jobId){
 		 
 		 try {

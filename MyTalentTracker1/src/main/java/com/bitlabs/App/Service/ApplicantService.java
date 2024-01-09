@@ -14,5 +14,7 @@ public interface ApplicantService {
 	public ResponseEntity<String> saveApplicant(JobApplicant applicant);
 	public List<JobApplicant> getAllApplicants();
 	 public List<JobApplicant> getApplicantsByStatus(String applicantStatus);
+	 
+	  public JobApplicant login(String email, String password);
 
 }

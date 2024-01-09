@@ -15,7 +15,7 @@ public class ViewJobController {
 	@Autowired
 	private JobRepository jobRepository;
 
-	   @GetMapping("/applicant/viewJob/{jobId}")
+	   @GetMapping("/applicants/viewJob/{jobId}")
 	 public ResponseEntity<?>viewJobDetailsByApplicant(@PathVariable Long jobId){
 		  Job job=jobRepository.findById(jobId).orElse(null);
 		  

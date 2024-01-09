@@ -15,8 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bitlabs.App.Entity.Job;
 import com.bitlabs.App.Entity.JobRecruiter;
 import com.bitlabs.App.Repository.JobRecruiterRepository;
+import com.bitlabs.App.Service.ApplyJobservice;
 import com.bitlabs.App.Service.JobService;
-
+import com.bitlabs.App.dto.AppliedApplicantInfo;
 
 import jakarta.validation.Valid;
 
@@ -28,6 +29,9 @@ public class JobController {
 	
 	@Autowired
 	private JobRecruiterRepository jobRecruiterRepository;
+	
+	@Autowired
+	private ApplyJobservice applyJobService;
 	
 	
 	
@@ -95,7 +99,7 @@ public class JobController {
 	}
 
  	    
-	 @GetMapping("/recruiters/viewJobs/{jobRecruiterId}")
+	 @GetMapping("/recruiter/viewJobs/{jobRecruiterId}")
 	    public ResponseEntity<List<Job>> getJobsByRecruiter(@PathVariable Long jobRecruiterId) {
 	        // You can add validation here to ensure the jobRecruiterId is valid.
 
@@ -109,9 +113,25 @@ public class JobController {
 	    }
 
 	
+	 
+	 
+	 @GetMapping("/recruiter/searchJobByTitleLocationAndSkillName")
+		public ResponseEntity<List<AppliedApplicantInfo>> searchJobByTitleLocationAndSkillName(
+		    @RequestParam(value = "jobTitle", required = false) String jobTitle,
+		    @RequestParam(value = "location", required = false) String location,
+		    @RequestParam(value = "skillName", required = false) String skillName
+		    ) {
+	 
+		    List<AppliedApplicantInfo> applicantInfo = applyJobService.getAppliedApplicantsByFilters(jobTitle,location,skillName);
+		//    System.out.println(jobs);
+	 
+		    return ResponseEntity.ok(applicantInfo);
+		}
+
+	 
  	}
 
-  
+
  
   
 

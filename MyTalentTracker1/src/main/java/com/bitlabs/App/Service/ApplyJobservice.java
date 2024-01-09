@@ -34,7 +34,7 @@ public interface ApplyJobservice {
 	        long applicantId, String applicantStatus);
 	        */
 	
-	
+	public List<AppliedApplicantInfo> getAppliedApplicantsByFilters(String jobTitle, String location, String skillName);
 	public List<AppliedApplicantInfo> getApplicantInfoByStatus(long applicantId,String applicantStatus);
 	
 	public List<AppliedApplicantInfo> getApplicantInfoByApplyJobId(long applyJobId);
@@ -49,4 +49,6 @@ public interface ApplyJobservice {
 	public int resetJobAlertCount(Long applicantId);
 	
 	public List<ApplicantDetailsDTO> getJobApplicantsDetailsByStatus(String applicantStatus);
+	
+	public long countShortlistedAndInterviewedApplicants(long recruiterId);
 }

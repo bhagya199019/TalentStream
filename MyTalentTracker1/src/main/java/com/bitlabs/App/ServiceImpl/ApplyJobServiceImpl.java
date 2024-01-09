@@ -3,11 +3,13 @@ package com.bitlabs.App.ServiceImpl;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.bitlabs.App.Entity.Alert;
@@ -17,7 +19,9 @@ import com.bitlabs.App.Entity.Job;
 import com.bitlabs.App.Entity.JobApplicant;
 import com.bitlabs.App.Entity.JobRecruiter;
 import com.bitlabs.App.Entity.RecruiterProfile;
+import com.bitlabs.App.Entity.RecruiterSkills;
 import com.bitlabs.App.Entity.ScheduleInterview;
+import com.bitlabs.App.Exception.CustomException;
 import com.bitlabs.App.Repository.AlertRepository;
 import com.bitlabs.App.Repository.ApplyJobRepository;
 import com.bitlabs.App.Repository.ApplyJobStatusHistoryRepository;
@@ -341,9 +345,46 @@ private List<ScheduleInterviewDTO> convertToScheduleInterviewDTOs(List<ScheduleI
             .collect(Collectors.toList());
 }
 
-   
-
+public List<AppliedApplicantInfo> getAppliedApplicantsByFilters(String jobTitle, String location, String skillName) {
+	List<ApplyJob> appliedJobs = applyJobRepository
+            .findByJobTitleAndLocationAndSkillName(
+                    jobTitle, location, skillName);
+ 
+    return appliedJobs.stream()
+            .map(applyJob -> {
+                RecruiterSkills skill = applyJob.getJob().getSkillsRequired().stream()
+                        .findFirst()  
+                        .orElse(new RecruiterSkills());
+ 
+                return new AppliedApplicantInfo(
+                        applyJob.getApplyjobid(),
+                        applyJob.getJobApplicant().getName(),
+                        applyJob.getJobApplicant().getEmail(),
+                        applyJob.getJobApplicant().getMobilenumber(),
+                        applyJob.getJob().getJobTitle(),
+                        applyJob.getApplicantStatus(),
+                        applyJob.getJob().getMinimumExperience(),
+                        skill.getSkillName(),
+                        applyJob.getJob().getMinimumQualification(),
+                        applyJob.getJob().getLocation()
+                );
+            })
+            .collect(Collectors.toList());
 }
+
+
+
+public long countShortlistedAndInterviewedApplicants(long recruiterId) {
+    try {
+        List<String> desiredStatusList = Arrays.asList("shortlisted", "interviewing");
+        return applyJobRepository.countShortlistedAndInterviewedApplicants(recruiterId, desiredStatusList);
+    } catch (Exception e) {
+        throw new CustomException("Failed to count shortlisted and interviewed applicants", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+}
+}
+
+
 
 
 

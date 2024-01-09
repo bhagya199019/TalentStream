@@ -32,7 +32,7 @@ public class JobAlertController {
        private JobApplicantRepository jobApplicantRepository;
 
 	   
-       @GetMapping("/applicant/{applicantId}/getjob-alerts")
+       @GetMapping("/applicants/{applicantId}/getjob-alerts")
 	    public ResponseEntity<List<Alert>> getJobAlertsByApplicantId(@PathVariable Long applicantId) {
     	   
 	        List<Alert> alerts = alertService.getAlertsByApplicantId(applicantId);
@@ -44,7 +44,7 @@ public class JobAlertController {
 
 
        
-       @GetMapping("/applicant/{applicantId}/getAlert-count")
+       @GetMapping("/applicants/{applicantId}/getAlert-count")
 	    public ResponseEntity<Integer> getAlertCount(@PathVariable Long applicantId) {
     	   JobApplicant jobApplicant = jobApplicantRepository.findById(applicantId)
                    .orElseThrow(() -> new IllegalArgumentException("JobApplicant not found"));
@@ -53,7 +53,7 @@ public class JobAlertController {
 	    }
        
      
-       @GetMapping("/applicant/{applicantId}/resetAlert-count")
+       @GetMapping("/applicants/{applicantId}/resetAlert-count")
 	    public ResponseEntity<Integer> resetAlertCount(@PathVariable Long applicantId) {
 	        int updatedAlertCount =applyJobService.resetJobAlertCount(applicantId);
 	        return ResponseEntity.ok(updatedAlertCount);

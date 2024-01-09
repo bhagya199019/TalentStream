@@ -16,7 +16,7 @@ public class FindRecommendedJobController {
 	private FindRecommendedJobService findRecommendedJobservice;
 	
 	
-	@GetMapping("/applicant/findRecommendedJobsBySkills/{applicantProfileId}")
+	@GetMapping("/applicants/findRecommendedJobsBySkills/{applicantProfileId}")
  public List<Job>recommendedJobToApplicant(@PathVariable String applicantProfileId){
 		
 		int applicantProfileid = Integer.parseInt(applicantProfileId);

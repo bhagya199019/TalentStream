@@ -38,6 +38,7 @@ public class Job {
     private Long id;
      
     @ManyToOne
+  //  @JoinColumn(name = "recruiter_id")
     private JobRecruiter jobRecruiter;
     
     @OneToMany(mappedBy="job")

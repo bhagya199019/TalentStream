@@ -18,6 +18,7 @@ import com.bitlabs.App.Entity.ApplyJobStatusHistory;
 import com.bitlabs.App.Entity.Job;
 import com.bitlabs.App.Entity.JobApplicant;
 import com.bitlabs.App.Entity.ScheduleInterview;
+import com.bitlabs.App.Exception.CustomException;
 import com.bitlabs.App.Service.AlertService;
 import com.bitlabs.App.Service.ApplicantService;
 import com.bitlabs.App.Service.ApplyJobservice;
@@ -44,7 +45,7 @@ public class ApplyJobController {
 	@Autowired
 	private ApplicantService applicantService;
 	
-   @PostMapping("/applicant/applyjob/{applicantId}/{jobId}")
+   @PostMapping("/applicants/applyjob/{applicantId}/{jobId}")
 	    public String saveJobForApplicant(
 	            @PathVariable long applicantId,
 	            @PathVariable long jobId
@@ -63,7 +64,7 @@ public class ApplyJobController {
    }
    
  
-   @GetMapping("/applicant/applyJob/getAppliedJobs/{applicantId}")
+   @GetMapping("/applicants/applyJob/getAppliedJobs/{applicantId}")
    public ResponseEntity<List<Job>> getAppliedJobsForApplicant(@PathVariable long applicantId)
             {
        try {
@@ -83,7 +84,7 @@ public class ApplyJobController {
    
    
       
-   @GetMapping("/applicant/checkstatus/{applyJobId}")
+   @GetMapping("/applicants/checkstatus/{applyJobId}")
    public ResponseEntity<List<ApplyJobStatusHistoryDTO>> getApplicantStatus(@PathVariable Long applyJobId) {
        List<ApplyJobStatusHistoryDTO> historyDTOList = applyJobService.getApplicantStatus(applyJobId);
        return ResponseEntity.ok(historyDTOList);
@@ -99,6 +100,9 @@ public class ApplyJobController {
        } else {
            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
        }
+       
+       
+       
    }
    
    
@@ -111,14 +115,14 @@ public class ApplyJobController {
    
    
 
-   @GetMapping("/applicant/check-interview-feedback/{applicantId}")
+   @GetMapping("/applicants/check-interview-feedback/{applicantId}")
    public List<InterviewFeedbackUpdateDTO> getFeedbackByApplicantId(
 		   @PathVariable long applicantId) {
        return scheduleInterviewService.getFeedbackByApplicantId(applicantId);
    }
 
 
-	 @GetMapping("/applicant/applyjob-status-history/{applyJobId}")
+	 @GetMapping("/applicants/applyjob-status-history/{applyJobId}")
 	    public ResponseEntity<List<ApplyJobStatusHistory>> getApplicantStatusHistory(@PathVariable Long applyJobId) {
 	        List<ApplyJobStatusHistory> historyList = applyJobService.getApplicantStatusHistory(applyJobId);
 	        return ResponseEntity.ok(historyList);
@@ -131,5 +135,16 @@ public class ApplyJobController {
 	        return ResponseEntity.ok(applicantDetails);
 	    }
 	 
-	 
+	 @GetMapping("/recruiter/countShortlistedAndInterviewed/{recruiterId}")
+	   public ResponseEntity<Long> countShortlistedAndInterviewedApplicants(@PathVariable Long recruiterId) {
+		   try {
+		        long count = applyJobService.countShortlistedAndInterviewedApplicants(recruiterId);
+		        return ResponseEntity.ok(count);
+		    } catch (CustomException e) {
+		        return ResponseEntity.status(e.getStatus()).body(0L);
+		    } catch (Exception e) {
+		       
+		        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(0L);
+		    }
+	   }
 }

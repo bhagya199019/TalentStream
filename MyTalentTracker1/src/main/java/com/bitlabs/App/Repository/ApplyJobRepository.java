@@ -66,10 +66,30 @@ public interface ApplyJobRepository extends JpaRepository<ApplyJob,Long>{
 
 	    @Query("SELECT a FROM ApplyJob a WHERE a.job.id = :jobId AND a.applicantStatus = :applicantStatus")
 	    List<ApplyJob> findByJobIdAndApplicantStatus(@Param("jobId") Long jobId, @Param("applicantStatus") String applicantStatus);
-	}
+	    
+	    
+	    @Query("SELECT DISTINCT aj " +
+			       "FROM ApplyJob aj " +
+			       "LEFT JOIN FETCH aj.job j " +
+			       "LEFT JOIN FETCH j.skillsRequired s " +
+			       "WHERE (:jobTitle IS NULL OR LOWER(j.jobTitle) LIKE LOWER(CONCAT('%', :jobTitle, '%'))) " +
+			       "AND (:location IS NULL OR LOWER(j.location) LIKE LOWER(CONCAT('%', :location, '%'))) " +
+			       "AND (:skillName IS NULL OR LOWER(s.skillName) = LOWER(:skillName))")
+			List<ApplyJob> findByJobTitleAndLocationAndSkillName(
+			        @Param("jobTitle") String jobTitle,
+			        @Param("location") String location,
+			        @Param("skillName") String skillName);
+	    
+	    
+	    @Query(value = "SELECT COUNT(*) FROM apply_job aj " +
+	            "JOIN Job j ON aj.job_id = j.id " +
+	            "WHERE j.job_recruiter_recruiter_id = :recruiterId " +
+	            "AND aj.applicant_status IN :statusList", nativeQuery = true)
+	long countShortlistedAndInterviewedApplicants(@Param("recruiterId") Long recruiterId,
+	                                           @Param("statusList") List<String> statusList);
 
 	
 
-	
+}
 
 
